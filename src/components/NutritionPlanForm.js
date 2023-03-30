@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import './NutritionPlanForm.css';
+import { useTelegram } from '../hooks/useTelegram';
 
 export const NutritionPlanForm = () => {
+    const [tg, onClose] = useTelegram();
+    tg.MainButton.show();
+    console.log(tg.MainButton);
+
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
     const [weight, setWeight] = useState('');
     const [height, setHeight] = useState('');
+    const [deal, setDeal] = useState('');
     const [activityLevel, setActivityLevel] = useState('');
     const [medicalConditions, setMedicalConditions] = useState('');
     const [balance, setBalance] = useState('');
@@ -13,35 +19,78 @@ export const NutritionPlanForm = () => {
     const [fat, setFat] = useState('');
     const [carbohydrate, setCarbohydrate] = useState('');
     const [variety, setVariety] = useState('');
-    const [personalPreferences, setPersonalPreferences] = useState('');
+    const [without, setWithout] = useState('');
     const [mealFrequency, setMealFrequency] = useState('');
 
+    const request = `Составь рацион питания на день для ${gender}
+    Возраст ${age},
+    рост  ${height} см,
+    вес  ${weight} кг. 
+    Цель -  ${deal}. 
+    Физическая активность -  ${activityLevel}. 
+    Заболевания -  ${medicalConditions}. 
+    Рацион должен содержать -  ${variety} . 
+    Рацион не должен содержать -  ${without}. 
+    Приемов пищи в день -  ${mealFrequency}. 
+    
+    Распредели продукты по граммам и напиши калорийность каждого приема пищи, а так же общую калорийность всего рациона. 
+  `;
+
+    console.log(request);
+
     return (
-        <div>
+        <div className="container">
             <h2>Новый рацион</h2>
             <h3>Характеристики клиента</h3>
-            <p></p>
+            {/* <p></p> */}
             <span>Пол</span>
             <select value={gender} onChange={(e) => setGender(e.target.value)}>
                 <option value="">Выберите пол</option>
-                <option value="М">Мужской</option>
-                <option value="Ж">Женский</option>
+                <option value="Мужчины">Мужской</option>
+                <option value="Женщины">Женский</option>
             </select>
-            <p></p>
+            {/* <p></p> */}
             <span>Возраст</span>
             <input type="number" value={age} onChange={(e) => setAge(e.target.value)} />
-            <p></p>
-            <span>Вес и рост</span>
-            <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
-            <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
-            <p></p>
+            {/* <p>
+                питание может отличаться в зависимости от возрастных групп. Детям и подросткам
+                необходимо больше кальция и белка для роста и развития, а пожилым людям может
+                потребоваться больше витаминов и минералов для поддержания здоровья.
+            </p> */}
+            <div className="flex">
+                <span>Вес (кг)</span>
+                <input
+                    className="inputWaH"
+                    type="number"
+                    value={weight}
+                    onChange={(e) => setWeight(e.target.value)}
+                />
+                <span>Рост (см)</span>
+                <input
+                    className="inputWaH"
+                    type="number"
+                    value={height}
+                    onChange={(e) => setHeight(e.target.value)}
+                />
+            </div>
+
+            <span>Частота приема пищи</span>
+            <select value={deal} onChange={(e) => setDeal(e.target.value)}>
+                <option value="0">Выбрать цель</option>
+                <option value="1">Набор мышечной массы</option>
+                <option value="2">Снижение веса</option>
+                <option value="3">Поддержание формы</option>
+            </select>
+
+            {/* <p></p> */}
             <span>Физическая активность</span>
-            <input
-                type="text"
-                value={activityLevel}
-                onChange={(e) => setActivityLevel(e.target.value)}
-            />
-            <p></p>
+            <select value={deal} onChange={(e) => setActivityLevel(e.target.value)}>
+                <option value="0">Выбрать вид</option>
+                <option value="1">Активный образ жизни 3 или более тренировки в день</option>
+                <option value="2">Снижение веса</option>
+                <option value="3">Поддержание формы</option>
+            </select>
+            {/* <p></p> */}
             <span>Заболевания</span>
             <input
                 type="text"
@@ -49,32 +98,14 @@ export const NutritionPlanForm = () => {
                 onChange={(e) => setMedicalConditions(e.target.value)}
             />
             <h3>Характеристики рациона</h3>
-            <p></p>
-            <span>Баланс</span>
-            <p></p>
-            <span>Белки</span>
-            <input type="number" value={protein} onChange={(e) => setProtein(e.target.value)} />
+            {/* <p></p> */}
 
-            <span>Жиры</span>
-            <input type="number" value={fat} onChange={(e) => setFat(e.target.value)} />
-
-            <span>Углеводы</span>
-            <input
-                type="number"
-                value={carbohydrate}
-                onChange={(e) => setCarbohydrate(e.target.value)}
-            />
-
-            <span>Разнообразие</span>
+            <span>Разнообразие и предпочтения</span>
             <input type="text" value={variety} onChange={(e) => setVariety(e.target.value)} />
-            <p></p>
-            <span>Личные предпочтения</span>
-            <input
-                type="text"
-                value={personalPreferences}
-                onChange={(e) => setPersonalPreferences(e.target.value)}
-            />
-            <p></p>
+            {/* <p></p> */}
+            <span>Не должно быть в рационе</span>
+            <input type="text" value={without} onChange={(e) => setWithout(e.target.value)} />
+            {/* <p></p> */}
             <span>Частота приема пищи</span>
             <select value={mealFrequency} onChange={(e) => setMealFrequency(e.target.value)}>
                 <option value="">Выберите частоту приема пищи</option>
@@ -85,6 +116,34 @@ export const NutritionPlanForm = () => {
                 <option value="7">7 раз в день</option>
                 <option value="8">8 раз в день</option>
             </select>
+
+            <h3>Баланс</h3>
+            <div className="flex">
+                {/* <p></p> */}
+                <span>Белки</span>
+                <input
+                    className="inputWaH"
+                    type="number"
+                    value={protein}
+                    onChange={(e) => setProtein(e.target.value)}
+                />
+
+                <span>Жиры</span>
+                <input
+                    className="inputWaH"
+                    type="number"
+                    value={fat}
+                    onChange={(e) => setFat(e.target.value)}
+                />
+
+                <span>Углеводы</span>
+                <input
+                    className="inputWaH"
+                    type="number"
+                    value={carbohydrate}
+                    onChange={(e) => setCarbohydrate(e.target.value)}
+                />
+            </div>
         </div>
     );
 };
