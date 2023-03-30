@@ -3,7 +3,7 @@ import './NutritionPlanForm.css';
 import { useTelegram } from '../hooks/useTelegram';
 
 export const NutritionPlanForm = () => {
-    const [tg, onClose] = useTelegram();
+    const [tg] = useTelegram();
     tg.MainButton.show();
     console.log(tg.MainButton);
 
@@ -14,7 +14,7 @@ export const NutritionPlanForm = () => {
     const [deal, setDeal] = useState('');
     const [activityLevel, setActivityLevel] = useState('');
     const [medicalConditions, setMedicalConditions] = useState('');
-    const [balance, setBalance] = useState('');
+    /* const [balance, setBalance] = useState(''); */
     const [protein, setProtein] = useState('');
     const [fat, setFat] = useState('');
     const [carbohydrate, setCarbohydrate] = useState('');
