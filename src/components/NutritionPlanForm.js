@@ -4,8 +4,6 @@ import { useTelegram } from '../hooks/useTelegram';
 
 export const NutritionPlanForm = () => {
     const [tg] = useTelegram();
-    tg.MainButton.show();
-    console.log(tg.MainButton);
 
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
@@ -21,6 +19,13 @@ export const NutritionPlanForm = () => {
     const [variety, setVariety] = useState('');
     const [without, setWithout] = useState('');
     const [mealFrequency, setMealFrequency] = useState('');
+
+    React.useEffect(() => {
+        tg.MainButton.setParams({
+            text: 'Сделать запрос',
+        });
+        tg.MainButton.show();
+    }, []);
 
     const request = `Составь рацион питания на день для ${gender}
     Возраст ${age},
