@@ -93,7 +93,8 @@ export const NutritionPlanForm = () => {
         <div className="container">
             <h2>Новый рацион</h2>
             <h3>Характеристики клиента</h3>
-            {/* <p></p> */}
+            <p>{JSON.stringify(userData)}</p>
+            <p>{JSON.stringify(initDataUnsafe)}</p>
             <span>Пол</span>
             <select value={gender} onChange={(e) => setGender(e.target.value)}>
                 <option value="">Выберите пол</option>
