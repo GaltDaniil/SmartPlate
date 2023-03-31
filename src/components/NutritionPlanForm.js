@@ -6,6 +6,8 @@ import axios from 'axios';
 export const NutritionPlanForm = () => {
     const [tg] = useTelegram();
 
+    const [isReady, setIsReady] = useState(false);
+
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
     const [weight, setWeight] = useState('');
@@ -21,6 +23,12 @@ export const NutritionPlanForm = () => {
     const [variety, setVariety] = useState('');
     const [without, setWithout] = useState('');
     const [mealFrequency, setMealFrequency] = useState('');
+
+    React.useEffect(() => {
+        if (gender && age && weight && height && deal && activityLevel && mealFrequency) {
+            setIsReady(true);
+        }
+    }, [gender, age, weight, height, deal, activityLevel, mealFrequency]);
 
     /* React.useEffect(() => {
         tg.expand();
@@ -59,18 +67,12 @@ export const NutritionPlanForm = () => {
         tg.sendData('123');
         tg.close();
     }, []); */
-    const userData = tg.initData;
-    const initDataUnsafe = tg.initDataUnsafe;
-
-    React.useEffect(() => {
-        console.log(userData);
-        console.log(initDataUnsafe);
-    }, [userData, initDataUnsafe]);
 
     const sendToServer = async () => {
         const user = tg.initDataUnsafe.user;
         const chat = tg.initDataUnsafe.chat;
         await axios.post('http://localhost:8080/ok/', { user, chat, requestText });
+        tg.close();
     };
 
     const requestText = `Составь рацион питания на день для ${gender}
@@ -86,15 +88,12 @@ export const NutritionPlanForm = () => {
     
     Распредели продукты по граммам и напиши калорийность каждого приема пищи, а так же общую калорийность всего рациона. 
   `;
-    console.log(userData);
-    console.log(initDataUnsafe);
 
     return (
         <div className="container">
             <h2>Новый рацион</h2>
             <h3>Характеристики клиента</h3>
-            <p>{JSON.stringify(initDataUnsafe.user)}</p>
-            <p>{JSON.stringify(initDataUnsafe.chat)}</p>
+
             <span>Пол</span>
             <select value={gender} onChange={(e) => setGender(e.target.value)}>
                 <option value="">Выберите пол</option>
@@ -126,7 +125,7 @@ export const NutritionPlanForm = () => {
                 />
             </div>
 
-            <span>Частота приема пищи</span>
+            <span>Цель рациона</span>
             <select value={deal} onChange={(e) => setDeal(e.target.value)}>
                 <option value="0">Выбрать цель</option>
                 <option value="1">Набор мышечной массы</option>
@@ -138,9 +137,16 @@ export const NutritionPlanForm = () => {
             <span>Физическая активность</span>
             <select value={deal} onChange={(e) => setActivityLevel(e.target.value)}>
                 <option value="0">Выбрать вид</option>
-                <option value="1">Активный образ жизни 3 или более тренировки в день</option>
-                <option value="2">Снижение веса</option>
-                <option value="3">Поддержание формы</option>
+                <option value="Активный образ жизни 3 или более тренировки в день">
+                    Активный образ жизни 3 или более тренировки в день
+                </option>
+                <option value="Активный образ жизни, без тренировок">
+                    Активный образ жизни, без тренировок
+                </option>
+                <option value="2-3 тренировки в неделю, образ жизни малоактивный">
+                    2-3 тренировки в неделю, образ жизни малоактивный
+                </option>
+                <option value="Малоактивный образ жизни">Малоактивный образ жизни</option>
             </select>
             {/* <p></p> */}
             <span>Заболевания</span>
@@ -197,12 +203,12 @@ export const NutritionPlanForm = () => {
                 />
             </div>
             <button
+                disabled={isReady ? false : true}
                 onClick={() => {
                     sendToServer();
                 }}
             >
-                {' '}
-                123
+                Составить рацион
             </button>
         </div>
     );
