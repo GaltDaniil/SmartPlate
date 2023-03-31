@@ -65,6 +65,13 @@ export const NutritionPlanForm = () => {
 
     return (
         <div className="container">
+            <button
+                onClick={() => {
+                    tg.sendData('123');
+                }}
+            >
+                123
+            </button>
             <h2>Новый рацион</h2>
             <h3>Характеристики клиента</h3>
             {/* <p></p> */}
