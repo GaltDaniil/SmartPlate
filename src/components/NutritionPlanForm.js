@@ -27,6 +27,14 @@ export const NutritionPlanForm = () => {
             text: 'Сделать запрос',
         });
         tg.MainButton.show();
+        tg.MainButton.onClick(function () {
+            window.Telegram.WebApp.sendData(
+                JSON.stringify({
+                    name: 'Daniil',
+                    lastName: 'Galt',
+                }),
+            );
+        });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -47,11 +55,11 @@ export const NutritionPlanForm = () => {
     }, []);
 
     const onSendData = React.useCallback(() => {
-        window.Telegram.WebApp.sendData(requestText);
-        window.Telegram.WebApp.close();
-    }, [requestText]);
+        tg.sendData('123');
+        tg.close();
+    }, []);
 
-    const requestText = `Составь рацион питания на день для ${gender}
+    /* const requestText = `Составь рацион питания на день для ${gender}
     Возраст ${age},
     рост  ${height} см,
     вес  ${weight} кг. 
@@ -63,7 +71,7 @@ export const NutritionPlanForm = () => {
     Приемов пищи в день -  ${mealFrequency}. 
     
     Распредели продукты по граммам и напиши калорийность каждого приема пищи, а так же общую калорийность всего рациона. 
-  `;
+  `; */
 
     return (
         <div className="container">
