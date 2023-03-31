@@ -86,6 +86,8 @@ export const NutritionPlanForm = () => {
     
     Распредели продукты по граммам и напиши калорийность каждого приема пищи, а так же общую калорийность всего рациона. 
   `;
+    console.log(userData);
+    console.log(initDataUnsafe);
 
     return (
         <div className="container">
