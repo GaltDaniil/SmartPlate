@@ -39,9 +39,13 @@ export const NutritionPlanForm = () => {
     }, [gender, age, weight, height, deal, mealFrequency]); */
 
     React.useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData);
+        tg.onEvent('mainButtonClicked', () => {
+            tg.sendData(JSON.stringify(requestText));
+        });
         return () => {
-            tg.offEvent('mainButtonClicked', onSendData);
+            tg.offEvent('mainButtonClicked', () => {
+                tg.sendData(JSON.stringify(requestText));
+            });
         };
     }, []);
 
@@ -65,13 +69,6 @@ export const NutritionPlanForm = () => {
 
     return (
         <div className="container">
-            <button
-                onClick={() => {
-                    tg.sendData('123');
-                }}
-            >
-                123
-            </button>
             <h2>Новый рацион</h2>
             <h3>Характеристики клиента</h3>
             {/* <p></p> */}
