@@ -47,12 +47,12 @@ export const NutritionPlanForm = () => {
         }
     }, [gender, age, weight, height, deal, mealFrequency]); */
 
-    React.useEffect(() => {
+    /* React.useEffect(() => {
         window.Telegram.WebApp.onEvent('mainButtonClicked', onSendData);
         return () => {
             window.Telegram.WebApp.offEvent('mainButtonClicked', onSendData);
         };
-    }, []);
+    }, []); */
 
     const onSendData = React.useCallback(() => {
         tg.sendData('123');
