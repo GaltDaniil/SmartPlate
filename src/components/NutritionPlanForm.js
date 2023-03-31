@@ -26,6 +26,9 @@ export const NutritionPlanForm = () => {
             text: 'Сделать запрос',
         });
         tg.MainButton.show();
+        tg.MainButton.onClick('mainButtonClicked', () => {
+            tg.sendData(data);
+        });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     React.useEffect(() => {
@@ -36,7 +39,7 @@ export const NutritionPlanForm = () => {
         }
     }, [gender, age, weight, height, deal, mealFrequency]);
 
-    const request = `Составь рацион питания на день для ${gender}
+    const data = `Составь рацион питания на день для ${gender}
     Возраст ${age},
     рост  ${height} см,
     вес  ${weight} кг. 
@@ -49,8 +52,6 @@ export const NutritionPlanForm = () => {
     
     Распредели продукты по граммам и напиши калорийность каждого приема пищи, а так же общую калорийность всего рациона. 
   `;
-
-    console.log(request);
 
     return (
         <div className="container">
