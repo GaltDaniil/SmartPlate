@@ -40,14 +40,15 @@ export const NutritionPlanForm = () => {
     }, [gender, age, weight, height, deal, mealFrequency]); */
 
     React.useEffect(() => {
-        window.Telegram.WebApp.onEvent('mainButtonClicked', () => {
-            window.Telegram.WebApp.sendData('123');
-            window.Telegram.WebApp.close();
-        });
+        window.Telegram.WebApp.onEvent('mainButtonClicked', onSendData);
+        return () => {
+            window.Telegram.WebApp.offEvent('mainButtonClicked', onSendData);
+        };
     }, []);
 
     const onSendData = React.useCallback(() => {
-        window.Telegram.WebApp.sendData(JSON.stringify(requestText));
+        window.Telegram.WebApp.sendData(requestText);
+        window.Telegram.WebApp.close();
     }, [requestText]);
 
     const requestText = `Составь рацион питания на день для ${gender}
