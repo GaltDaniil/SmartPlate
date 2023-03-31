@@ -25,6 +25,7 @@ export const NutritionPlanForm = () => {
         tg.MainButton.setParams({
             text: 'Сделать запрос',
         });
+        tg.MainButton.show();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     React.useEffect(() => {
