@@ -22,7 +22,7 @@ export const NutritionPlanForm = () => {
     const [mealFrequency, setMealFrequency] = useState('');
 
     const onSendData = React.useCallback(() => {
-        tg.sendData(requestText);
+        tg.sendData({ requestText });
     }, [requestText]);
 
     React.useEffect(() => {
