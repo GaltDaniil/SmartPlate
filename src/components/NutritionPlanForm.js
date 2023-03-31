@@ -21,17 +21,6 @@ export const NutritionPlanForm = () => {
     const [without, setWithout] = useState('');
     const [mealFrequency, setMealFrequency] = useState('');
 
-    const onSendData = React.useCallback(() => {
-        tg.sendData({ requestText });
-    }, [requestText]);
-
-    React.useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData);
-        return () => {
-            tg.offEvent('mainButtonClicked', onSendData);
-        };
-    }, []);
-
     React.useEffect(() => {
         tg.MainButton.setParams({
             text: 'Сделать запрос',
@@ -41,13 +30,24 @@ export const NutritionPlanForm = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    React.useEffect(() => {
+    /* React.useEffect(() => {
         if (!gender || !age || !weight || !height || !deal || !mealFrequency) {
             tg.MainButton.disable();
         } else {
             tg.MainButton.enable();
         }
-    }, [gender, age, weight, height, deal, mealFrequency]);
+    }, [gender, age, weight, height, deal, mealFrequency]); */
+
+    React.useEffect(() => {
+        tg.onEvent('mainButtonClicked', onSendData);
+        return () => {
+            tg.offEvent('mainButtonClicked', onSendData);
+        };
+    }, []);
+
+    const onSendData = React.useCallback(() => {
+        tg.sendData(JSON.stringify(requestText));
+    }, [requestText]);
 
     const requestText = `Составь рацион питания на день для ${gender}
     Возраст ${age},
