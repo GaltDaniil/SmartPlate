@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './NutritionPlanForm.css';
 import { useTelegram } from '../hooks/useTelegram';
+import axios from 'axios';
 
 export const NutritionPlanForm = () => {
     const [tg] = useTelegram();
@@ -21,7 +22,7 @@ export const NutritionPlanForm = () => {
     const [without, setWithout] = useState('');
     const [mealFrequency, setMealFrequency] = useState('');
 
-    React.useEffect(() => {
+    /* React.useEffect(() => {
         tg.expand();
         tg.MainButton.setParams({
             text: 'Сделать запрос',
@@ -37,7 +38,7 @@ export const NutritionPlanForm = () => {
         });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, []); */
 
     /* React.useEffect(() => {
         if (!gender || !age || !weight || !height || !deal || !mealFrequency) {
@@ -54,12 +55,25 @@ export const NutritionPlanForm = () => {
         };
     }, []); */
 
-    const onSendData = React.useCallback(() => {
+    /*  const onSendData = React.useCallback(() => {
         tg.sendData('123');
         tg.close();
-    }, []);
+    }, []); */
+    const userData = tg.initData;
+    const initDataUnsafe = tg.initDataUnsafe;
 
-    /* const requestText = `Составь рацион питания на день для ${gender}
+    React.useEffect(() => {
+        console.log(userData);
+        console.log(initDataUnsafe);
+    }, [userData, initDataUnsafe]);
+
+    const sendToServer = async () => {
+        const user = tg.initDataUnsafe.user;
+        const chat = tg.initDataUnsafe.chat;
+        await axios.post('http://localhost:8080/ok/', { user, chat, requestText });
+    };
+
+    const requestText = `Составь рацион питания на день для ${gender}
     Возраст ${age},
     рост  ${height} см,
     вес  ${weight} кг. 
@@ -71,7 +85,7 @@ export const NutritionPlanForm = () => {
     Приемов пищи в день -  ${mealFrequency}. 
     
     Распредели продукты по граммам и напиши калорийность каждого приема пищи, а так же общую калорийность всего рациона. 
-  `; */
+  `;
 
     return (
         <div className="container">
@@ -179,6 +193,14 @@ export const NutritionPlanForm = () => {
                     onChange={(e) => setCarbohydrate(e.target.value)}
                 />
             </div>
+            <button
+                onClick={() => {
+                    sendToServer();
+                }}
+            >
+                {' '}
+                123
+            </button>
         </div>
     );
 };
