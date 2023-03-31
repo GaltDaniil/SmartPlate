@@ -24,7 +24,9 @@ export const NutritionPlanForm = () => {
         tg.MainButton.setParams({
             text: 'Сделать запрос',
         });
-        tg.MainButton.show();
+        if (age && weight) {
+            tg.MainButton.show();
+        }
     }, []);
 
     const request = `Составь рацион питания на день для ${gender}
