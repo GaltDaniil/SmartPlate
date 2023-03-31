@@ -16,6 +16,7 @@ export const NutritionPlanForm = () => {
     const [protein, setProtein] = useState('');
     const [fat, setFat] = useState('');
     const [carbohydrate, setCarbohydrate] = useState('');
+
     const [variety, setVariety] = useState('');
     const [without, setWithout] = useState('');
     const [mealFrequency, setMealFrequency] = useState('');
@@ -24,10 +25,15 @@ export const NutritionPlanForm = () => {
         tg.MainButton.setParams({
             text: 'Сделать запрос',
         });
-        if (age && weight) {
-            tg.MainButton.show();
-        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    React.useEffect(() => {
+        if (!gender || !age || !weight || !height || !deal || !mealFrequency) {
+            tg.MainButton.disable();
+        } else {
+            tg.MainButton.enable();
+        }
+    }, [gender, age, weight, height, deal, mealFrequency]);
 
     const request = `Составь рацион питания на день для ${gender}
     Возраст ${age},
