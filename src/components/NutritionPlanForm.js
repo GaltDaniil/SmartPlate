@@ -21,16 +21,26 @@ export const NutritionPlanForm = () => {
     const [without, setWithout] = useState('');
     const [mealFrequency, setMealFrequency] = useState('');
 
+    const onSendData = React.useCallback(() => {
+        tg.sendData(requestText);
+    }, []);
+
+    React.useEffect(() => {
+        tg.onEvent('mainButtonClicked', onSendData);
+        return () => {
+            tg.offEvent('mainButtonClicked', onSendData);
+        };
+    }, []);
+
     React.useEffect(() => {
         tg.MainButton.setParams({
             text: 'Сделать запрос',
         });
         tg.MainButton.show();
-        tg.MainButton.onClick('mainButtonClicked', () => {
-            tg.sendData(data);
-        });
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
     React.useEffect(() => {
         if (!gender || !age || !weight || !height || !deal || !mealFrequency) {
             tg.MainButton.disable();
@@ -39,7 +49,7 @@ export const NutritionPlanForm = () => {
         }
     }, [gender, age, weight, height, deal, mealFrequency]);
 
-    const data = `Составь рацион питания на день для ${gender}
+    const requestText = `Составь рацион питания на день для ${gender}
     Возраст ${age},
     рост  ${height} см,
     вес  ${weight} кг. 
