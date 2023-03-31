@@ -23,7 +23,7 @@ export const NutritionPlanForm = () => {
 
     const onSendData = React.useCallback(() => {
         tg.sendData(requestText);
-    }, []);
+    }, [requestText]);
 
     React.useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
