@@ -34,7 +34,10 @@ export const NutritionPlanForm = () => {
     const sendToServer = async () => {
         setIsReady(false);
         const user = tg.initDataUnsafe.user;
-        await axios.post('http://localhost:8080/api/users/send/', { user, requestText });
+        const resp = await axios.post('http://localhost:8080/api/users/send/', {
+            user,
+            requestText,
+        });
         tg.close();
     };
 
