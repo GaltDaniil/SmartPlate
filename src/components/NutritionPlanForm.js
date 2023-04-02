@@ -128,14 +128,14 @@ export const NutritionPlanForm = () => {
             <span>Цель рациона</span>
             <select value={deal} onChange={(e) => setDeal(e.target.value)}>
                 <option value="0">Выбрать цель</option>
-                <option value="1">Набор мышечной массы</option>
-                <option value="2">Снижение веса</option>
-                <option value="3">Поддержание формы</option>
+                <option value="Набор мышечной массы">Набор мышечной массы</option>
+                <option value="Снижение веса">Снижение веса</option>
+                <option value="Поддержание формы">Поддержание формы</option>
             </select>
 
             {/* <p></p> */}
             <span>Физическая активность</span>
-            <select value={deal} onChange={(e) => setActivityLevel(e.target.value)}>
+            <select value={activityLevel} onChange={(e) => setActivityLevel(e.target.value)}>
                 <option value="0">Выбрать вид</option>
                 <option value="Активный образ жизни 3 или более тренировки в день">
                     Активный образ жизни 3 или более тренировки в день
