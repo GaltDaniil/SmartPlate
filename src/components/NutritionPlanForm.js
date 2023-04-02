@@ -7,6 +7,7 @@ export const NutritionPlanForm = () => {
     const [tg] = useTelegram();
 
     const [isReady, setIsReady] = useState(false);
+    const [isloading, setIsLoading] = useState(false);
 
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
@@ -31,6 +32,7 @@ export const NutritionPlanForm = () => {
     }, [gender, age, weight, height, deal, activityLevel, mealFrequency]);
 
     const sendToServer = async () => {
+        setIsReady(false);
         const user = tg.initDataUnsafe.user;
         const chat = tg.initDataUnsafe.chat;
         await axios.post('http://localhost:8080/api/users/send/', { user, chat, requestText });
