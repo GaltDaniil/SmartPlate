@@ -28,7 +28,7 @@ export const Loader = () => {
     console.log(ref);
     return (
         <div className="container">
-            <div className="loader">Loading...</div>
+            <div className="loader"></div>
             <span>{texts[textIndex]}</span>
         </div>
     );
