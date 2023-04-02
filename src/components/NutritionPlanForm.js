@@ -30,44 +30,6 @@ export const NutritionPlanForm = () => {
         }
     }, [gender, age, weight, height, deal, activityLevel, mealFrequency]);
 
-    /* React.useEffect(() => {
-        tg.expand();
-        tg.MainButton.setParams({
-            text: 'Сделать запрос',
-        });
-        tg.MainButton.show();
-        tg.MainButton.onClick(function () {
-            window.Telegram.WebApp.sendData(
-                JSON.stringify({
-                    name: 'Daniil',
-                    lastName: 'Galt',
-                }),
-            );
-        });
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); */
-
-    /* React.useEffect(() => {
-        if (!gender || !age || !weight || !height || !deal || !mealFrequency) {
-            tg.MainButton.disable();
-        } else {
-            tg.MainButton.enable();
-        }
-    }, [gender, age, weight, height, deal, mealFrequency]); */
-
-    /* React.useEffect(() => {
-        window.Telegram.WebApp.onEvent('mainButtonClicked', onSendData);
-        return () => {
-            window.Telegram.WebApp.offEvent('mainButtonClicked', onSendData);
-        };
-    }, []); */
-
-    /*  const onSendData = React.useCallback(() => {
-        tg.sendData('123');
-        tg.close();
-    }, []); */
-
     const sendToServer = async () => {
         const user = tg.initDataUnsafe.user;
         const chat = tg.initDataUnsafe.chat;
