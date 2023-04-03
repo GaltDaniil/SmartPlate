@@ -21,8 +21,8 @@ function App() {
 
     return (
         <>
+            <p>{JSON.stringify(tg.initDataUnsafe)}</p>
             <Router>
-                <p>{JSON.stringify(tg.initDataUnsafe)}</p>
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/form" element={<NutritionPlanForm />} />
