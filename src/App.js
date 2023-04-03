@@ -28,7 +28,7 @@ function App() {
         <>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Main />} />
+                    <Route path="/" element={<Main tokens={userInfo.tokens} />} />
                     <Route path="/form" element={<NutritionPlanForm />} />
                     <Route path="/info" element={<Info />} />
                     <Route path="/pay" element={<Main />} />

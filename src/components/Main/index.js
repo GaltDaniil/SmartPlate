@@ -2,7 +2,7 @@ import styles from './Main.module.scss';
 import React from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
 
-export const Main = () => {
+export const Main = ({ tokens }) => {
     const [tg] = useTelegram();
 
     return (
@@ -12,7 +12,7 @@ export const Main = () => {
                 <div className={styles.info}>
                     <div style={{ display: 'flex' }}>
                         <h3>Запросов осталось:</h3>
-                        <span>{tg.initDataUnsafe.user.id}</span>
+                        <span>{tokens}</span>
                     </div>
                     <div style={{ display: 'flex' }}>
                         <h3>Рационов составлено:</h3>
