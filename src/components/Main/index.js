@@ -3,7 +3,7 @@ import React from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
 
 export const Main = () => {
-    const tg = useTelegram();
+    const [tg] = useTelegram();
 
     return (
         <div className={styles.container}>
