@@ -9,20 +9,23 @@ import { Main } from './components/Main';
 import { Info } from './components/Info';
 
 function App() {
-    const tg = useTelegram();
-    console.log(tg.initDataUnsafe);
-    //const user = tg.initDataUnsafe.user;
+    const [tg] = useTelegram();
 
-    const [userInfo, setUserInfo] = React.useState([]);
+    const [userInfo, setUserInfo] = React.useState({});
 
     React.useEffect(() => {
-        //axios.get(`http://localhost:8080/api/users/${}`);
+        const fn = async () => {
+            const data = await axios.get(
+                `http://localhost:8080/api/users/${tg.initDataUnsafe.user.id}`,
+            );
+            console.log(data);
+            setUserInfo((pred) => data);
+        };
+        fn();
     }, []);
 
     return (
         <>
-            <p>{JSON.stringify(tg.initDataUnsafe)}</p>
-            <p>{JSON.stringify(tg.initDataUnsafe)}</p>
             <Router>
                 <Routes>
                     <Route path="/" element={<Main />} />
