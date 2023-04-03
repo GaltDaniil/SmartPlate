@@ -22,6 +22,7 @@ function App() {
     return (
         <>
             <p>{JSON.stringify(tg.initDataUnsafe)}</p>
+            <p>{JSON.stringify(tg.initDataUnsafe)}</p>
             <Router>
                 <Routes>
                     <Route path="/" element={<Main />} />
