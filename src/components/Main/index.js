@@ -1,7 +1,10 @@
 import styles from './Main.module.scss';
 import React from 'react';
+import { useTelegram } from '../../hooks/useTelegram';
 
 export const Main = () => {
+    const tg = useTelegram();
+
     return (
         <div className={styles.container}>
             <img src="./plate.png" alt="" />
@@ -9,7 +12,7 @@ export const Main = () => {
                 <div className={styles.info}>
                     <div style={{ display: 'flex' }}>
                         <h3>Запросов осталось:</h3>
-                        <span>{window.Telegram.WebApp.initDataUnsafe.user.id}</span>
+                        <span>{tg.initDataUnsafe.user.id}</span>
                     </div>
                     <div style={{ display: 'flex' }}>
                         <h3>Рационов составлено:</h3>
