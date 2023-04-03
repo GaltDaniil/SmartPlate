@@ -9,7 +9,7 @@ export const Main = () => {
                 <div className={styles.info}>
                     <div style={{ display: 'flex' }}>
                         <h3>Запросов осталось:</h3>
-                        <span>2</span>
+                        <span>{window.Telegram.WebApp.initDataUnsafe.user.id}</span>
                     </div>
                     <div style={{ display: 'flex' }}>
                         <h3>Рационов составлено:</h3>
