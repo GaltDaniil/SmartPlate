@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    img {
+        margin-top: 50px;
+        width: 70%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .shape {
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+        border: 1px solid rgb(238, 238, 238);
+        background: rgb(248, 248, 248);
+        margin: 0 20px;
+        border-radius: 20px;
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0;
+            h3 {
+                font-size: 14px;
+                margin: 0;
+                width: 170px;
+                font-weight: 400;
+                margin-bottom: 5px;
+            }
+            span {
+                font-size: 14px;
+                margin: 0;
+                width: 170px;
+                font-weight: 400;
+            }
+        }
+
+        button {
+            border: 1px solid rgb(212, 212, 212);
+            background: rgb(152, 182, 118);
+            color: white;
+            border-radius: 8px;
+            height: 45px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+    }
+}

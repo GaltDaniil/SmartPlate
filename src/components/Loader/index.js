@@ -1,4 +1,4 @@
-import './Loader.css';
+import stules from './Loader.module.scss';
 
 import React from 'react';
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './NutritionPlanForm.css';
-import { useTelegram } from '../hooks/useTelegram';
+import styles from './Form.module.scss';
+import { useTelegram } from '../../hooks/useTelegram';
 import axios from 'axios';
-import { Loader } from './Loader.js';
+import { Loader } from '../Loader';
 
 export const NutritionPlanForm = () => {
     const [tg] = useTelegram();
@@ -63,7 +63,7 @@ export const NutritionPlanForm = () => {
             {isLoading ? (
                 <Loader />
             ) : (
-                <div className="container2">
+                <div className={styles.container}>
                     <h2>Новый рацион</h2>
                     <h3>Характеристики клиента</h3>
 
@@ -81,17 +81,17 @@ export const NutritionPlanForm = () => {
                 необходимо больше кальция и белка для роста и развития, а пожилым людям может
                 потребоваться больше витаминов и минералов для поддержания здоровья.
             </p> */}
-                    <div className="flex">
+                    <div className={styles.flex}>
                         <span>Вес (кг)</span>
                         <input
-                            className="inputWaH"
+                            className={styles.inputWaH}
                             type="number"
                             value={weight}
                             onChange={(e) => setWeight(e.target.value)}
                         />
                         <span>Рост (см)</span>
                         <input
-                            className="inputWaH"
+                            className={styles.inputWaH}
                             type="number"
                             value={height}
                             onChange={(e) => setHeight(e.target.value)}
@@ -163,11 +163,11 @@ export const NutritionPlanForm = () => {
                     </select>
 
                     <h3>Баланс</h3>
-                    <div className="flex">
+                    <div className={styles.flex}>
                         {/* <p></p> */}
                         <span>Белки</span>
                         <input
-                            className="inputWaH"
+                            className={styles.inputWaH}
                             type="number"
                             value={protein}
                             onChange={(e) => setProtein(e.target.value)}
@@ -175,7 +175,7 @@ export const NutritionPlanForm = () => {
 
                         <span>Жиры</span>
                         <input
-                            className="inputWaH"
+                            className={styles.inputWaH}
                             type="number"
                             value={fat}
                             onChange={(e) => setFat(e.target.value)}
@@ -183,7 +183,7 @@ export const NutritionPlanForm = () => {
 
                         <span>Углеводы</span>
                         <input
-                            className="inputWaH"
+                            className={styles.inputWaH}
                             type="number"
                             value={carbohydrate}
                             onChange={(e) => setCarbohydrate(e.target.value)}
