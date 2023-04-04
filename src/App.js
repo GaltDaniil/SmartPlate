@@ -10,16 +10,14 @@ import { Info } from './components/Info';
 
 function App() {
     const [tg] = useTelegram();
+    const userId = '299602933';
 
     const [userInfo, setUserInfo] = React.useState({});
 
     React.useEffect(() => {
         const fn = async () => {
-            const data = await axios.get(
-                `http://localhost:8080/api/users/${tg.initDataUnsafe.user.id}`,
-            );
-            console.log(data);
-            setUserInfo((pred) => data);
+            const { data } = await axios.get(`http://localhost:8080/api/users/${userId}`);
+            setUserInfo((pred) => data.userData);
         };
         fn();
     }, []);
