@@ -4,7 +4,7 @@ import { useTelegram } from '../../hooks/useTelegram';
 import axios from 'axios';
 import { Loader } from '../Loader';
 
-export const NutritionPlanForm = () => {
+export const Form = ({ tokens }) => {
     const [tg] = useTelegram();
 
     const [isReady, setIsReady] = useState(false);
@@ -27,7 +27,16 @@ export const NutritionPlanForm = () => {
     const [mealFrequency, setMealFrequency] = useState('');
 
     React.useEffect(() => {
-        if (gender && age && weight && height && deal && activityLevel && mealFrequency) {
+        if (
+            gender &&
+            age &&
+            weight &&
+            height &&
+            deal &&
+            activityLevel &&
+            mealFrequency &&
+            tokens > 0
+        ) {
             setIsReady(true);
         }
     }, [gender, age, weight, height, deal, activityLevel, mealFrequency]);
@@ -36,8 +45,9 @@ export const NutritionPlanForm = () => {
         setIsReady(false);
         setIsLoading(true);
         const user = tg.initDataUnsafe.user;
+        const userId = '299602933';
         await axios.post('http://localhost:8080/api/users/send/', {
-            user,
+            userId,
             requestText,
         });
         tg.close();
@@ -65,6 +75,7 @@ export const NutritionPlanForm = () => {
             ) : (
                 <div className={styles.container}>
                     <h2>Новый рацион</h2>
+
                     <h3>Характеристики клиента</h3>
 
                     <span>Пол</span>
@@ -197,6 +208,7 @@ export const NutritionPlanForm = () => {
                     >
                         Составить рацион
                     </button>
+                    <span>{`Осталось ${tokens} зап.`}</span>
                 </div>
             )}
         </div>

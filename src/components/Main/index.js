@@ -1,10 +1,8 @@
 import styles from './Main.module.scss';
 import React from 'react';
-import { useTelegram } from '../../hooks/useTelegram';
+import { Link } from 'react-router-dom';
 
-export const Main = ({ tokens }) => {
-    const [tg] = useTelegram();
-
+export const Main = ({ tokens, diets }) => {
     return (
         <div className={styles.container}>
             <img src="./plate.png" alt="" />
@@ -16,12 +14,18 @@ export const Main = ({ tokens }) => {
                     </div>
                     <div style={{ display: 'flex' }}>
                         <h3>Рационов составлено:</h3>
-                        <span>0</span>
+                        <span>{diets}</span>
                     </div>
                 </div>
-                <button>Новый рацион</button>
-                <button>Добавить запросов</button>
-                <button>Инструкция</button>
+                <Link to={'/form'} className={styles.button}>
+                    Новый рацион
+                </Link>
+                <Link to={'/pay'} className={styles.button}>
+                    Добавить запросов
+                </Link>
+                <Link to={'/info'} className={styles.button}>
+                    Инструкция
+                </Link>
             </div>
         </div>
     );

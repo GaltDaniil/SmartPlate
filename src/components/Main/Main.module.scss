@@ -27,18 +27,24 @@
                 width: 170px;
                 font-weight: 400;
                 margin-bottom: 5px;
+                opacity: 0.6;
             }
             span {
                 font-size: 14px;
                 margin: 0;
                 width: 170px;
                 font-weight: 400;
+                opacity: 0.6;
             }
         }
 
-        button {
+        .button {
+            display: flex;
             border: 1px solid rgb(212, 212, 212);
             background: rgb(152, 182, 118);
+            text-decoration: none;
+            align-items: center;
+            justify-content: center;
             color: white;
             border-radius: 8px;
             height: 45px;
