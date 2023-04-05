@@ -22,6 +22,7 @@ export const Main = ({ tokens, diets }) => {
                     myProp: 'myProp value',
                 },
             },
+
             {
                 onSuccess: function (options) {
                     // success
