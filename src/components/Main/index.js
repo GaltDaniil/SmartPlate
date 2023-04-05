@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Main = ({ tokens, diets }) => {
     const pay = function () {
+        // eslint-disable-next-line no-undef
         var widget = new cp.CloudPayments();
         widget.pay(
             'auth', // или 'charge'
