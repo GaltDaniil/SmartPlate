@@ -46,7 +46,7 @@ export const Form = ({ tokens }) => {
         setIsLoading(true);
         const user = tg.initDataUnsafe.user;
         const userId = '299602933';
-        await axios.post('http://localhost:8080/api/users/send/', {
+        await axios.post('http://194.58.97.233:8080/api/users/send/', {
             userId,
             requestText,
         });

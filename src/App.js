@@ -16,7 +16,7 @@ function App() {
 
     React.useEffect(() => {
         const fn = async () => {
-            const { data } = await axios.get(`http://localhost:8080/api/users/${userId}`);
+            const { data } = await axios.get(`http://194.58.97.233:8080/api/users/${userId}`);
             setUserInfo((pred) => data);
         };
         fn();
