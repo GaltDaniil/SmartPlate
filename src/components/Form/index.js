@@ -46,7 +46,7 @@ export const Form = ({ tokens }) => {
         setIsLoading(true);
         const user = tg.initDataUnsafe.user;
         const userId = '299602933';
-        await axios.post('https://smartdietai.ru/api/users/send/', {
+        await axios.post('https://smartdietai.ru/api/users/sendGpt/', {
             userId,
             requestText,
         });

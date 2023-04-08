@@ -1,21 +1,25 @@
 import styles from './Main.module.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export const Main = ({ tokens, diets }) => {
-    const pay = function () {
+    const addToken = async (cost) => {};
+
+    const pay = function (cost) {
         // eslint-disable-next-line no-undef
         var widget = new cp.CloudPayments();
+
         widget.pay(
             'auth', // или 'charge'
             {
                 //options
                 publicId: 'pk_1ae4c5b6c3d7d278f36e9e18db6ee', //id из личного кабинета
                 description: 'Оплата токенов', //назначение
-                amount: 50, //сумма
+                amount: cost, //сумма
                 currency: 'RUB', //валюта
                 accountId: 'user@example.com', //идентификатор плательщика (необязательно)
-                invoiceId: '1234567', //номер заказа  (необязательно)
+                /* invoiceId: '1234567', //номер заказа  (необязательно) */
                 email: 'user@example.com', //email плательщика (необязательно)
                 skin: 'mini', //дизайн виджета (необязательно)
                 data: {
@@ -34,7 +38,10 @@ export const Main = ({ tokens, diets }) => {
                 },
                 onComplete: function (paymentResult, options) {
                     //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
-                    //например вызов вашей аналитики Facebook Pixel
+                    //тут должна быть смысловая конструкция else if чтобы отрабатывать ОК
+                    //addToken(cost)
+                    //await axios.post("https://smartdietai.ru/api/users/pay", cost)
+
                     console.log('получен ответ');
                     console.log(paymentResult);
                 },
