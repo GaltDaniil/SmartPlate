@@ -7,6 +7,7 @@ import { Form } from './components/Form';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Main } from './components/Main';
 import { Info } from './components/Info';
+import { Pay } from './components/Pay';
 
 function App() {
     const [tg] = useTelegram();
@@ -34,7 +35,7 @@ function App() {
                         element={<Form tokens={userInfo.tokens} diets={userInfo.diets} />}
                     />
                     <Route path="/info" element={<Info />} />
-                    <Route path="/pay" element={<Main />} />
+                    <Route path="/pay" element={<Pay />} />
                 </Routes>
             </Router>
         </>

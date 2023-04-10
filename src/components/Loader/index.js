@@ -1,4 +1,4 @@
-import stules from './Loader.module.scss';
+import styles from './Loader.module.scss';
 
 import React from 'react';
 
@@ -22,13 +22,9 @@ export const Loader = () => {
         return () => clearInterval(interval);
     }, [texts]);
 
-    const loadingText = () => {
-        setInterval(() => {}, 2000);
-    };
-    console.log(ref);
     return (
-        <div className="container">
-            <div className="loader"></div>
+        <div className={styles.container}>
+            <div className={styles.loader}></div>
             <span>{texts[textIndex]}</span>
         </div>
     );

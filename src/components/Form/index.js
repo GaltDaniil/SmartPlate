@@ -45,7 +45,7 @@ export const Form = ({ tokens }) => {
         setIsReady(false);
         setIsLoading(true);
         const user = tg.initDataUnsafe.user;
-        const userId = '299602933';
+        const userId = user.id;
         await axios.post('https://smartdietai.ru/api/users/sendGpt/', {
             userId,
             requestText,
@@ -208,7 +208,6 @@ export const Form = ({ tokens }) => {
                     >
                         Составить рацион
                     </button>
-                    <span>{`Осталось ${tokens} зап.`}</span>
                 </div>
             )}
         </div>
