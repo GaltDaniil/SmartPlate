@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Pay } from '../Pay';
 
-export const Main = ({ tokens, diets }) => {
+export const Main = ({ tokens, diets, userId }) => {
     const [payIsOpen, setPayIsOpen] = React.useState(false);
 
     return (
@@ -44,7 +44,7 @@ export const Main = ({ tokens, diets }) => {
                     </Link>
                 </div>
 
-                {payIsOpen ? <Pay setPayIsOpen={setPayIsOpen} /> : null}
+                {payIsOpen ? <Pay userId={userId} setPayIsOpen={setPayIsOpen} /> : null}
             </div>
         </div>
     );

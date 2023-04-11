@@ -4,8 +4,8 @@ import axios from '../../axios.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 
-export const Pay = ({ setPayIsOpen, userInfo }) => {
-    const [activeItem, setActiveItem] = React.useState({ index: '0', value: 1 });
+export const Pay = ({ setPayIsOpen, userId }) => {
+    const [activeItem, setActiveItem] = React.useState({ index: '0', value: 129 });
     console.log(activeItem);
 
     const pay = function (cost) {
@@ -20,12 +20,12 @@ export const Pay = ({ setPayIsOpen, userInfo }) => {
                 description: 'Пополнить баланс запросов', //назначение
                 amount: cost, //сумма
                 currency: 'RUB', //валюта
-                accountId: userInfo.userId, //идентификатор плательщика (необязательно)
+                accountId: userId, //идентификатор плательщика (необязательно)
                 /* invoiceId: '1234567', //номер заказа  (необязательно) */
                 email: 'user@example.com', //email плательщика (необязательно)
                 skin: 'mini', //дизайн виджета (необязательно)
                 data: {
-                    date: new Date(),
+                    myProp: 'some text',
                 },
             },
 
@@ -42,18 +42,13 @@ export const Pay = ({ setPayIsOpen, userInfo }) => {
                     console.log(options);
                 },
                 onComplete: async function (paymentResult, options) {
-                    //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
-                    //тут должна быть смысловая конструкция else if чтобы отрабатывать ОК
-                    //addToken(cost)
                     if (paymentResult.success) {
                         await axios.post('/users/pay', {
                             amount: cost,
-                            userId: userInfo.userId,
+                            userId: userId,
                             email: options.email,
-                            date: options.data.date,
                         });
                     }
-                    //await axios.post("/users/pay", cost)
 
                     console.log('получен ответ');
                     console.log(paymentResult);

@@ -1,19 +1,18 @@
 import React from 'react';
 import './App.css';
-import axios from './axios.js';
+import axios from './axios';
 import { useTelegram } from './hooks/useTelegram';
 
 import { Form } from './components/Form';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Main } from './components/Main';
 import { Info } from './components/Info';
-import { Pay } from './components/Pay';
 
 function App() {
     const [tg] = useTelegram();
     const user = tg.initDataUnsafe.user;
     const userId = '299602933';
-    //const userId = user.id
+    //const userId = user.id;
 
     const [userInfo, setUserInfo] = React.useState({});
 
@@ -31,14 +30,15 @@ function App() {
                 <Routes>
                     <Route
                         path="/"
-                        element={<Main tokens={userInfo.tokens} diets={userInfo.diets} />}
+                        element={
+                            <Main userId={userId} tokens={userInfo.tokens} diets={userInfo.diets} />
+                        }
                     />
                     <Route
                         path="/form"
                         element={<Form tokens={userInfo.tokens} diets={userInfo.diets} />}
                     />
                     <Route path="/info" element={<Info />} />
-                    <Route path="/pay" element={<Pay userInfo={userInfo} />} />
                 </Routes>
             </Router>
         </>

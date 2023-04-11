@@ -1,7 +1,18 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
+    .menuBar {
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        align-items: center;
+        background: rgb(245, 245, 245);
+        padding: 20px;
+        border-bottom: 1px solid rgb(240, 240, 240);
+    }
+    .field {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
 
     span {
         opacity: 0.8;
@@ -13,28 +24,34 @@
         margin-top: 5px;
         margin-bottom: 15px;
         padding: 5px;
-        height: 35px;
+        height: 45px;
         border-radius: 5px;
         border: 1px solid rgb(175, 175, 175);
+        box-shadow: 2px 2px 0px 0px rgb(41, 41, 41);
     }
 
     select {
         margin-top: 5px;
         margin-bottom: 15px;
         padding: 5px;
+        color: rgb(114, 114, 114);
         height: 45px;
         border-radius: 5px;
         border: 1px solid rgb(175, 175, 175);
+        box-shadow: 2px 2px 0px 0px rgb(41, 41, 41);
     }
 
     .flex {
         display: flex;
         align-items: center;
+        justify-content: space-between;
     }
 
     .inputWaH {
-        width: 40px;
-        margin-right: 8px;
+        width: 30%;
+    }
+    h3 {
+        margin-top: 15px;
     }
 
     p {
@@ -49,6 +66,7 @@
         margin-right: auto;
         border-radius: 8px;
         color: white;
+        font-size: 16px;
         border: 1px solid rgb(216, 216, 216);
         background-color: rgb(129, 173, 71);
     }
