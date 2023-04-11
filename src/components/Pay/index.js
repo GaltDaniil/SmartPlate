@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './Pay.module.scss';
+import axios from '../../axios.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 
-export const Pay = ({ setPayIsOpen }) => {
-    const [activeItem, setActiveItem] = React.useState({ index: '0', value: 129 });
+export const Pay = ({ setPayIsOpen, userInfo }) => {
+    const [activeItem, setActiveItem] = React.useState({ index: '0', value: 1 });
     console.log(activeItem);
-    const addToken = async (cost) => {};
 
     const pay = function (cost) {
         // eslint-disable-next-line no-undef
@@ -18,14 +18,14 @@ export const Pay = ({ setPayIsOpen }) => {
                 //options
                 publicId: 'pk_1ae4c5b6c3d7d278f36e9e18db6ee', //id из личного кабинета
                 description: 'Пополнить баланс запросов', //назначение
-                amount: 0, //сумма
+                amount: cost, //сумма
                 currency: 'RUB', //валюта
-                accountId: 'user@example.com', //идентификатор плательщика (необязательно)
+                accountId: userInfo.userId, //идентификатор плательщика (необязательно)
                 /* invoiceId: '1234567', //номер заказа  (необязательно) */
                 email: 'user@example.com', //email плательщика (необязательно)
                 skin: 'mini', //дизайн виджета (необязательно)
                 data: {
-                    myProp: 'myProp value',
+                    date: new Date(),
                 },
             },
 
@@ -33,19 +33,31 @@ export const Pay = ({ setPayIsOpen }) => {
                 onSuccess: function (options) {
                     // success
                     console.log('Принята оплата');
+                    console.log(options);
                 },
                 onFail: function (reason, options) {
                     // fail
                     console.log('ошибка');
+                    console.log(reason);
+                    console.log(options);
                 },
-                onComplete: function (paymentResult, options) {
+                onComplete: async function (paymentResult, options) {
                     //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
                     //тут должна быть смысловая конструкция else if чтобы отрабатывать ОК
                     //addToken(cost)
-                    //await axios.post("https://smartdietai.ru/api/users/pay", cost)
+                    if (paymentResult.success) {
+                        await axios.post('/users/pay', {
+                            amount: cost,
+                            userId: userInfo.userId,
+                            email: options.email,
+                            date: options.data.date,
+                        });
+                    }
+                    //await axios.post("/users/pay", cost)
 
                     console.log('получен ответ');
                     console.log(paymentResult);
+                    console.log(options);
                 },
             },
         );
@@ -63,7 +75,6 @@ export const Pay = ({ setPayIsOpen }) => {
                 />
                 <ul className={styles.tarifs}>
                     <li
-                        value={10}
                         onClick={() => {
                             setActiveItem((pred) => {
                                 return { index: '0', value: 129 };
@@ -75,7 +86,6 @@ export const Pay = ({ setPayIsOpen }) => {
                         <span>129 руб.</span>
                     </li>
                     <li
-                        value={30}
                         onClick={() => {
                             setActiveItem((pred) => {
                                 return { index: '1', value: 299 };
@@ -87,7 +97,6 @@ export const Pay = ({ setPayIsOpen }) => {
                         <span>299 руб.</span>
                     </li>
                     <li
-                        value={60}
                         onClick={() => {
                             setActiveItem((pred) => {
                                 return { index: '2', value: 549 };

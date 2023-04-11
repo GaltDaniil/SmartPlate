@@ -3,7 +3,6 @@ import styles from './Loader.module.scss';
 import React from 'react';
 
 export const Loader = () => {
-    const ref = React.useRef;
     const texts = [
         'Анализируем ваши данные...',
         'Подбираем продукты...',

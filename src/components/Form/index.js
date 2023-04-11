@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Form.module.scss';
 import { useTelegram } from '../../hooks/useTelegram';
-import axios from 'axios';
+import axios from '../../axios.js';
 import { Loader } from '../Loader';
 
 export const Form = ({ tokens }) => {
@@ -46,7 +46,7 @@ export const Form = ({ tokens }) => {
         setIsLoading(true);
         const user = tg.initDataUnsafe.user;
         const userId = user.id;
-        await axios.post('https://smartdietai.ru/api/users/sendGpt/', {
+        await axios.post('/users/sendGpt/', {
             userId,
             requestText,
         });

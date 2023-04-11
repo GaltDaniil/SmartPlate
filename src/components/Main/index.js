@@ -1,7 +1,6 @@
 import styles from './Main.module.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { Pay } from '../Pay';
 
 export const Main = ({ tokens, diets }) => {

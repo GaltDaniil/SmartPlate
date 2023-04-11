@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import axios from 'axios';
+import axios from './axios.js';
 import { useTelegram } from './hooks/useTelegram';
 
 import { Form } from './components/Form';
@@ -11,17 +11,20 @@ import { Pay } from './components/Pay';
 
 function App() {
     const [tg] = useTelegram();
+    const user = tg.initDataUnsafe.user;
     const userId = '299602933';
+    //const userId = user.id
 
     const [userInfo, setUserInfo] = React.useState({});
 
     React.useEffect(() => {
         const fn = async () => {
-            const { data } = await axios.get(`https://smartdietai.ru/api/users/${userId}`);
+            const { data } = await axios.get(`/users/${userId}`);
             setUserInfo((pred) => data);
         };
         fn();
     }, []);
+
     return (
         <>
             <Router>
@@ -35,7 +38,7 @@ function App() {
                         element={<Form tokens={userInfo.tokens} diets={userInfo.diets} />}
                     />
                     <Route path="/info" element={<Info />} />
-                    <Route path="/pay" element={<Pay />} />
+                    <Route path="/pay" element={<Pay userInfo={userInfo} />} />
                 </Routes>
             </Router>
         </>
