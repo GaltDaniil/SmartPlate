@@ -61,7 +61,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
     return (
         <div className={styles.overlay}>
             <div className={styles.payContainer}>
-                <h2>Добавить запросов</h2>
+                <h2>Добавить токенов</h2>
                 <FontAwesomeIcon
                     onClick={() => setPayIsOpen((pred) => !pred)}
                     className={styles.xmark}

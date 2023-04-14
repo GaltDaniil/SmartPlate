@@ -3,26 +3,27 @@
     flex-direction: column;
     justify-content: center;
 
-    .circle {
-        position: absolute;
+    .content {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 90%;
-        height: 150px;
-        background: rgb(152, 182, 118);
-        border-radius: 0 0 20px 20px;
-        overflow: hidden;
-        top: 0px;
-        left: 5%;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 20px;
+        background: rgb(140, 222, 131);
+        background: linear-gradient(
+            3deg,
+            rgba(140, 222, 131, 1) 0%,
+            rgba(113, 180, 105, 1) 33%,
+            rgba(102, 162, 94, 1) 100%
+        );
+        border-radius: 20px 20px 0 0;
     }
     .image {
-        z-index: 2;
         margin: 0;
         margin-left: auto;
-        margin-top: 60px;
-        margin-right: 20px;
-        width: 150px;
+        margin-top: -70px;
+        margin-right: auto;
+        margin-bottom: -100px;
+        width: 100%;
     }
     .title {
         font-family: Arial, Helvetica, sans-serif;
@@ -45,19 +46,23 @@
     .shape {
         display: flex;
         flex-direction: column;
-        background: rgb(255, 255, 255);
-        margin: 0 20px;
-        border-radius: 20px;
+        background: rgb(252, 252, 252);
+        padding: 0 24px;
+        padding-top: 40px;
+        border-radius: 40px;
 
         .info {
-            background: rgb(245, 245, 245);
+            background: rgb(249, 255, 244);
+            border: 1px solid rgb(222, 235, 214);
+            //box-shadow: 0px 0px 5px 2px rgba(236, 236, 236, 0.4);
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
 
             h2 {
-                margin-bottom: 10px;
+                margin-bottom: 8px;
+                color: rgb(87, 87, 87);
             }
 
             h3 {
@@ -79,32 +84,43 @@
 
         .mainButton {
             display: flex;
-            background: rgb(0, 0, 0);
+            background: rgb(156, 221, 125);
             text-decoration: none;
             align-items: center;
             justify-content: center;
             font-size: 16px;
             color: white;
             border-radius: 8px;
-            height: 55px;
+            height: 45px;
             margin-bottom: 10px;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         .button {
             display: flex;
-            border: 1px solid rgb(212, 212, 212);
             background: rgb(255, 255, 255);
+            border: 1px solid rgb(226, 226, 226);
             text-decoration: none;
             align-items: center;
             justify-content: center;
-            box-shadow: 2px 2px 0px 0px black;
+            //box-shadow: 0px 2px 5px 2px rgb(240, 240, 240);
             color: rgb(0, 0, 0);
             border-radius: 8px;
+            font-size: 16px;
             height: 45px;
             width: 48%;
             margin-bottom: 10px;
             margin-top: 10px;
+        }
+        .version {
+            text-align: center;
+            align-items: center;
+            width: 86px;
+            display: flex;
+            position: absolute;
+            color: rgb(163, 163, 163);
+            bottom: 10px;
+            left: calc(50% - 43px);
         }
     }
 }

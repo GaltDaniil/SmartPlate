@@ -80,14 +80,14 @@ export const Form = ({ tokens }) => {
                     <div className={styles.menuBar}>
                         <Link to={'/'}>
                             <FontAwesomeIcon
-                                color="black"
+                                color="white"
                                 onClick={() => {}}
                                 icon={faAngleLeft}
-                                size="lg"
+                                size="sm"
                             />
                         </Link>
 
-                        <h2>Новый рацион</h2>
+                        <h2 style={{ color: 'white', fontSize: '20px' }}>Новый рацион</h2>
                         <FontAwesomeIcon
                             style={{ opacity: '0' }}
                             icon={faCircleQuestion}

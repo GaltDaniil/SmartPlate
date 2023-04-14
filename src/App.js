@@ -7,6 +7,7 @@ import { Form } from './components/Form';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Main } from './components/Main';
 import { Info } from './components/Info';
+import { Recipt } from './components/Recipt';
 
 function App() {
     const [tg] = useTelegram();
@@ -15,30 +16,42 @@ function App() {
     //const userId = user.id;
 
     const [userInfo, setUserInfo] = React.useState({});
+    const [isLoaded, setIsLoaded] = React.useState(false);
 
     React.useEffect(() => {
+        setIsLoaded(false);
         const fn = async () => {
             const { data } = await axios.get(`/users/${userId}`);
             setUserInfo((pred) => data);
         };
         fn();
+
+        tg.expand();
+        setIsLoaded(true);
     }, []);
 
     return (
         <>
             <Router>
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Main userId={userId} tokens={userInfo.tokens} diets={userInfo.diets} />
-                        }
-                    />
+                    {isLoaded ? (
+                        <Route
+                            path="/"
+                            element={
+                                <Main
+                                    userId={userId}
+                                    tokens={userInfo.tokens}
+                                    diets={userInfo.diets}
+                                />
+                            }
+                        />
+                    ) : null}
                     <Route
                         path="/form"
                         element={<Form tokens={userInfo.tokens} diets={userInfo.diets} />}
                     />
                     <Route path="/info" element={<Info />} />
+                    <Route path="/recipt" element={<Recipt />} />
                 </Routes>
             </Router>
         </>

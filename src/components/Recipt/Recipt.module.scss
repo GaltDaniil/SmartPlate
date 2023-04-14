@@ -21,8 +21,8 @@
     }
 
     input {
-        margin-top: 5px;
-        margin-bottom: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         font-size: 15px;
         padding: 5px 10px;
         height: 45px;
@@ -31,20 +31,6 @@
         border: 1px solid rgb(214, 214, 214);
         //box-shadow: 2px 2px 0px 0px rgba(41, 41, 41, 1);
     }
-
-    select {
-        margin-top: 5px;
-        margin-bottom: 15px;
-        font-size: 15px;
-        padding: 5px 10px;
-        color: rgb(114, 114, 114);
-        height: 45px;
-        border-radius: 10px;
-        border: 1px solid rgb(214, 214, 214);
-        background: #f7f7f7;
-        //box-shadow: 2px 2px 0px 0px rgb(41, 41, 41);
-    }
-
     .flex {
         display: flex;
         align-items: center;
@@ -56,18 +42,30 @@
     }
     h3 {
         margin-top: 15px;
+        margin-bottom: 16px;
     }
 
-    p {
-        font-size: 13px;
+    span {
+        font-size: 16px;
         opacity: 0.7;
+        margin-bottom: 16px;
     }
+    .addIngredient {
+        margin-left: auto;
+        margin-right: auto;
+        height: 45px;
+        font-size: 22px;
+        color: rgb(153, 153, 153);
+        margin-top: 0px;
+        width: 70px;
+        background: rgb(255, 255, 255);
+        border: 1px dashed rgb(129, 129, 129);
+    }
+
     button {
         height: 45px;
         width: 100%;
         margin-top: 20px;
-        margin-left: auto;
-        margin-right: auto;
         border-radius: 8px;
         color: white;
         font-size: 16px;
@@ -77,5 +75,8 @@
     button:disabled {
         background-color: rgb(202, 202, 202);
         color: rgb(39, 39, 39);
+    }
+    .delete {
+        color: #ffc6c6;
     }
 }

@@ -8,18 +8,18 @@ export const Main = ({ tokens, diets, userId }) => {
 
     return (
         <div className={styles.container}>
-            <div className={styles.circle}></div>
-            <h2 className={styles.title}>
+            {/* <h2 className={styles.title}>
                 Составь <b>Идеальный</b>
                 <br />
                 <b>Рацион</b> Питания
-            </h2>
-            <img className={styles.image} src="./blackPlate.png" alt="" />
+            </h2> */}
+            <img className={styles.image} src="./background2.jpg" alt="" />
+
             <div className={styles.shape}>
                 <div className={styles.info}>
                     <h2>Статистика</h2>
                     <div style={{ display: 'flex' }}>
-                        <h3>Запросов осталось:</h3>
+                        <h3>Баланс токенов:</h3>
                         <span>{tokens}</span>
                     </div>
                     <div style={{ display: 'flex' }}>
@@ -36,13 +36,14 @@ export const Main = ({ tokens, diets, userId }) => {
                         to={''}
                         className={styles.button}
                     >
-                        Добавить запросов
+                        Добавить токенов
                     </Link>
 
                     <Link to={'/info'} className={styles.button}>
                         Инструкция
                     </Link>
                 </div>
+                <span className={styles.version}>Версия 0.2.1</span>
 
                 {payIsOpen ? <Pay userId={userId} setPayIsOpen={setPayIsOpen} /> : null}
             </div>
