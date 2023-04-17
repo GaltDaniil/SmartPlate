@@ -12,6 +12,8 @@ export const Form = ({ tokens }) => {
 
     const [isReady, setIsReady] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isCheckedSpecial, setIsCheckedSpecial] = useState(false);
+    const [isCheckedPro, setIsCheckedPro] = useState(false);
 
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
@@ -24,6 +26,7 @@ export const Form = ({ tokens }) => {
     const [protein, setProtein] = useState('');
     const [fat, setFat] = useState('');
     const [carbohydrate, setCarbohydrate] = useState('');
+    const [calories, setCalories] = useState('');
 
     const [variety, setVariety] = useState('');
     const [without, setWithout] = useState('');
@@ -66,7 +69,8 @@ export const Form = ({ tokens }) => {
     Заболевания -  ${medicalConditions}. 
     Рацион должен содержать -  ${variety} . 
     Рацион не должен содержать -  ${without}. 
-    Приемов пищи в день -  ${mealFrequency}. 
+    Приемов пищи в день -  ${mealFrequency}.
+    ${calories ? `Общее количество калорий рациона должна быть около ${calories} калорий` : ''} 
     
     Распредели продукты по граммам и напиши калорийность каждого приема пищи, а так же общую калорийность всего рациона. 
   `;
@@ -180,12 +184,25 @@ export const Form = ({ tokens }) => {
                             <option value="8">8 раз в день</option>
                         </select>
 
-                        <h3>Продвинутые параметры</h3>
+                        <div style={{ display: 'flex' }}>
+                            <input
+                                className={styles.check}
+                                type="checkbox"
+                                onChange={() => {
+                                    setIsCheckedSpecial((pred) => !pred);
+                                }}
+                            />
+                            <h3 className={!isCheckedSpecial ? `${styles.isCheckedTitle}` : ''}>
+                                Особенности рациона
+                            </h3>
+                        </div>
 
                         {/* <p></p> */}
                         {/* <span>Заболевания</span> */}
                         <input
+                            className={!isCheckedSpecial ? `${styles.isCheckedInput}` : ``}
                             type="text"
+                            disabled={isCheckedSpecial ? false : true}
                             placeholder={'Противопоказания'}
                             value={medicalConditions}
                             onChange={(e) => setMedicalConditions(e.target.value)}
@@ -193,7 +210,9 @@ export const Form = ({ tokens }) => {
 
                         {/* <span>Разнообразие и предпочтения</span> */}
                         <input
+                            className={!isCheckedSpecial ? `${styles.isCheckedInput}` : ``}
                             type="text"
+                            disabled={isCheckedSpecial ? false : true}
                             placeholder={'Включить продукты'}
                             value={variety}
                             onChange={(e) => setVariety(e.target.value)}
@@ -201,18 +220,36 @@ export const Form = ({ tokens }) => {
                         {/* <p></p> */}
                         {/* <span>Не должно быть в рационе</span> */}
                         <input
+                            className={!isCheckedSpecial ? `${styles.isCheckedInput}` : ``}
                             type="text"
+                            disabled={isCheckedSpecial ? false : true}
                             placeholder={'Исключить продукты'}
                             value={without}
                             onChange={(e) => setWithout(e.target.value)}
                         />
                         {/* <p></p> */}
+                        <div style={{ display: 'flex' }}>
+                            <input
+                                className={styles.check}
+                                type="checkbox"
+                                onChange={() => {
+                                    setIsCheckedPro((pred) => !pred);
+                                }}
+                            />
+                            <h3 className={!isCheckedPro ? `${styles.isCheckedTitle}` : ''}>
+                                Баланс
+                            </h3>
+                        </div>
 
-                        <h3>Баланс</h3>
                         <div className={styles.flex}>
                             {/* <span>Белки</span> */}
                             <input
-                                className={styles.inputWaH}
+                                className={
+                                    !isCheckedPro
+                                        ? `${styles.inputWaH} ${styles.isCheckedInput}`
+                                        : `${styles.inputWaH}`
+                                }
+                                disabled={isCheckedPro ? false : true}
                                 type="number"
                                 placeholder={'Белки %'}
                                 value={protein}
@@ -221,7 +258,12 @@ export const Form = ({ tokens }) => {
 
                             {/* <span>Жиры</span> */}
                             <input
-                                className={styles.inputWaH}
+                                className={
+                                    !isCheckedPro
+                                        ? `${styles.inputWaH} ${styles.isCheckedInput}`
+                                        : `${styles.inputWaH}`
+                                }
+                                disabled={isCheckedPro ? false : true}
                                 type="number"
                                 placeholder={'Жиры %'}
                                 value={fat}
@@ -230,13 +272,26 @@ export const Form = ({ tokens }) => {
 
                             {/* <span>Углеводы</span> */}
                             <input
-                                className={styles.inputWaH}
+                                className={
+                                    !isCheckedPro
+                                        ? `${styles.inputWaH} ${styles.isCheckedInput}`
+                                        : `${styles.inputWaH}`
+                                }
+                                disabled={isCheckedPro ? false : true}
                                 type="number"
                                 placeholder={'Углеводы %'}
                                 value={carbohydrate}
                                 onChange={(e) => setCarbohydrate(e.target.value)}
                             />
                         </div>
+                        <input
+                            className={!isCheckedPro ? `${styles.isCheckedInput}` : ``}
+                            type="text"
+                            disabled={isCheckedPro ? false : true}
+                            placeholder={'Количество калорий'}
+                            value={without}
+                            onChange={(e) => setCalories(e.target.value)}
+                        />
                         <button
                             disabled={isReady ? false : true}
                             onClick={() => {

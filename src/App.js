@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Main } from './components/Main';
 import { Info } from './components/Info';
 import { Recipt } from './components/Recipt';
+import { AnaliticsPage } from './components/AnaliticsPage';
 
 function App() {
     const [tg] = useTelegram();
@@ -52,6 +53,7 @@ function App() {
                     />
                     <Route path="/info" element={<Info />} />
                     <Route path="/recipt" element={<Recipt />} />
+                    <Route path="/analitics" element={<AnaliticsPage />} />
                 </Routes>
             </Router>
         </>

@@ -30,6 +30,9 @@ export const Main = ({ tokens, diets, userId }) => {
                 <Link to={'/form'} className={styles.mainButton}>
                     Новый рацион
                 </Link>
+                <Link to={'/recipt'} className={styles.mainButton}>
+                    Собрать рецепт
+                </Link>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Link
                         onClick={() => setPayIsOpen((pred) => !pred)}
@@ -43,7 +46,7 @@ export const Main = ({ tokens, diets, userId }) => {
                         Инструкция
                     </Link>
                 </div>
-                <span className={styles.version}>Версия 0.2.1</span>
+                <span className={styles.version}>Версия 1.2.1</span>
 
                 {payIsOpen ? <Pay userId={userId} setPayIsOpen={setPayIsOpen} /> : null}
             </div>

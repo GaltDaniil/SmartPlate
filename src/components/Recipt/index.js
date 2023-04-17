@@ -5,28 +5,31 @@ import { useTelegram } from '../../hooks/useTelegram';
 import axios from '../../axios.js';
 import { Loader } from '../Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faCircleQuestion, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 
 export const Recipt = ({ tokens }) => {
     const [tg] = useTelegram();
 
-    const [isReady, setIsReady] = useState(false);
+    const [text, setText] = useState('');
+    const [isDisable, setIsDisable] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [inputFields, setInputFields] = useState([{ value: '' }]);
-
-    /* React.useEffect(() => {
-        if (products && tokens > 0) {
-            setIsReady(true);
+    React.useEffect(() => {
+        if (text /*  && tokens > 0 */) {
+            setIsDisable(false);
         }
-    }, [products]); */
+        if (!text /*  && tokens > 0 */) {
+            setIsDisable(true);
+        }
+    }, [text]);
 
     const sendToServer = async () => {
-        setIsReady(false);
         setIsLoading(true);
         const user = tg.initDataUnsafe.user;
-        const userId = user.id;
-        await axios.post('/users/gptRecipt/', {
+        //const userId = user.id;
+        const userId = '299602933';
+
+        await axios.post('/users/sendGpt', {
             userId,
             requestText,
         });
@@ -34,19 +37,8 @@ export const Recipt = ({ tokens }) => {
         setIsLoading(false);
     };
 
-    const concat = inputFields.reduce((acc, el) => {
-        return acc + `${el.value}, `;
-    }, '');
-
-    const requestText = `Напиши варианты рецептов из следующих продуктов:
-    ${concat}
-  `;
-
-    const handleInputChange = (index, event) => {
-        const values = [...inputFields];
-        values[index].value = event.target.value;
-        setInputFields(values);
-    };
+    const requestText = `Напиши два варианта рецептов из ${text}. Распиши алгоритм готовки и конечное количество калорий`;
+    //const requestText = `В моем холодильнике есть ${text}. Что можно приготовить из этих продуктов?`;
 
     return (
         <div>
@@ -74,36 +66,25 @@ export const Recipt = ({ tokens }) => {
                     <div className={styles.field}>
                         <h3>Теперь посмотрим, что есть в твоем холодильнике...</h3>
                         <span>
-                            Добавьте ингридиенты в формате "Куринная грудка 200 грамм" или
-                            "Авокадо". Каждый продукт добавляйте в новое поле.
+                            Добавьте ингридиенты через запятую в формате "Куриное филе, картофель,
+                            сметана..."
                         </span>
-                        {inputFields.map((inputField, index) => {
-                            return (
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <input
-                                        key={index}
-                                        type="text"
-                                        value={inputField.value}
-                                        onChange={(event) => handleInputChange(index, event)}
-                                    ></input>
-                                    <FontAwesomeIcon
-                                        className={styles.delete}
-                                        icon={faTrash}
-                                        size="lg"
-                                    />
-                                </div>
-                            );
-                        })}
 
-                        <button
+                        <input
+                            type="text"
+                            value={text}
+                            onChange={(event) => setText(event.target.value)}
+                        ></input>
+
+                        {/* <button
                             onClick={() => setInputFields([...inputFields, { value: '' }])}
                             className={styles.addIngredient}
                         >
                             +
-                        </button>
+                        </button> */}
 
                         <button
-                            disabled={isReady ? false : true}
+                            disabled={isDisable ? true : false}
                             onClick={() => {
                                 sendToServer();
                             }}

@@ -27,7 +27,7 @@
         padding: 5px 10px;
         height: 45px;
         border-radius: 10px;
-        background: #f7f7f7;
+        background: #ffffff;
         border: 1px solid rgb(214, 214, 214);
         //box-shadow: 2px 2px 0px 0px rgba(41, 41, 41, 1);
     }
@@ -41,7 +41,7 @@
         height: 45px;
         border-radius: 10px;
         border: 1px solid rgb(214, 214, 214);
-        background: #f7f7f7;
+        background: #ffffff;
         //box-shadow: 2px 2px 0px 0px rgb(41, 41, 41);
     }
 
@@ -61,6 +61,16 @@
     p {
         font-size: 13px;
         opacity: 0.7;
+    }
+    .check {
+        width: 25px;
+        margin-right: 10px;
+    }
+    .isCheckedTitle {
+        color: rgb(161, 161, 161);
+    }
+    .isCheckedInput {
+        background: #ebebeb;
     }
     button {
         height: 45px;
