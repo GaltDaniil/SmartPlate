@@ -6,7 +6,6 @@ import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 
 export const Pay = ({ setPayIsOpen, userId }) => {
     const [activeItem, setActiveItem] = React.useState({ index: '0', value: 129 });
-    console.log(activeItem);
 
     const pay = function (cost) {
         // eslint-disable-next-line no-undef

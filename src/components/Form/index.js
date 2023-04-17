@@ -33,19 +33,10 @@ export const Form = ({ tokens }) => {
     const [mealFrequency, setMealFrequency] = useState('');
 
     React.useEffect(() => {
-        if (
-            gender &&
-            age &&
-            weight &&
-            height &&
-            deal &&
-            activityLevel &&
-            mealFrequency &&
-            tokens > 0
-        ) {
+        if (gender && age && weight && height && activityLevel && mealFrequency && tokens > 0) {
             setIsReady(true);
         }
-    }, [gender, age, weight, height, deal, activityLevel, mealFrequency]);
+    }, [gender, age, weight, height, activityLevel, mealFrequency]);
 
     const sendToServer = async () => {
         setIsReady(false);
@@ -64,15 +55,29 @@ export const Form = ({ tokens }) => {
     Возраст ${age},
     рост  ${height} см,
     вес  ${weight} кг. 
-    Цель -  ${deal}. 
-    Физическая активность -  ${activityLevel}. 
-    Заболевания -  ${medicalConditions}. 
-    Рацион должен содержать -  ${variety} . 
-    Рацион не должен содержать -  ${without}. 
-    Приемов пищи в день -  ${mealFrequency}.
-    ${calories ? `Общее количество калорий рациона должна быть около ${calories} калорий` : ''} 
+    Цель рациона - снижение веса. 
+    Физическая активность -  ${activityLevel},
+    Приемов пищи в день -  ${mealFrequency},
+    ${
+        isCheckedSpecial
+            ? `Рацион должен содержать -  ${variety} , 
+    Рацион не должен содержать -  ${without}, 
+    Противопоказания и заболевания - ${medicalConditions ? `${medicalConditions}` : 'отсутствуют'}`
+            : ''
+    } 
     
-    Распредели продукты по граммам и напиши калорийность каждого приема пищи, а так же общую калорийность всего рациона. 
+    
+    ${
+        isCheckedPro
+            ? `Общее количество калорий рациона должна быть около ${calories} калорий. Из суточной калорийности ${protein}% из белка, ${carbohydrate}% из углеводов и ${fat}% из жиров`
+            : ''
+    } 
+    
+    Напиши количество грамм каждого продукта в сыром виде. Напиши калорийность, количество белков, жиров и углеводов в граммах всего рациона. НЕ ПИШИ КБЖУ каждого ингредиента. Напиши отдельные продукты и количество грамм каждого. НЕ добавляй готовые блюда. 
+
+Включи большую часть продуктов с низкой плотностью калорий, исключи жидкие калории и колбасные изделия, добавь в рацион не менее 500 грамм овощей и 400 грамм фруктов.
+
+Завтрак сформируй из продуктов, традиционных для завтраков в России или на Западе.
   `;
 
     return (
@@ -142,12 +147,12 @@ export const Form = ({ tokens }) => {
                         </div>
 
                         {/* <span>Цель рациона</span> */}
-                        <select value={deal} onChange={(e) => setDeal(e.target.value)}>
+                        {/* <select value={deal} onChange={(e) => setDeal(e.target.value)}>
                             <option value="0">Цель рациона*</option>
                             <option value="Набор мышечной массы">Набор мышечной массы</option>
                             <option value="Снижение веса">Снижение веса</option>
                             <option value="Поддержание формы">Поддержание формы</option>
-                        </select>
+                        </select> */}
 
                         {/* <p></p> */}
                         {/* <span>Физическая активность</span> */}
@@ -176,12 +181,9 @@ export const Form = ({ tokens }) => {
                             onChange={(e) => setMealFrequency(e.target.value)}
                         >
                             <option value="">Частота приема пищи*</option>
+                            <option value="2">2 раза в день</option>
                             <option value="3">3 раза в день</option>
                             <option value="4">4 раза в день</option>
-                            <option value="5">5 раз в день</option>
-                            <option value="6">6 раз в день</option>
-                            <option value="7">7 раз в день</option>
-                            <option value="8">8 раз в день</option>
                         </select>
 
                         <div style={{ display: 'flex' }}>
@@ -289,7 +291,7 @@ export const Form = ({ tokens }) => {
                             type="text"
                             disabled={isCheckedPro ? false : true}
                             placeholder={'Количество калорий'}
-                            value={without}
+                            value={calories}
                             onChange={(e) => setCalories(e.target.value)}
                         />
                         <button

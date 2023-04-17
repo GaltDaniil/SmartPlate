@@ -26,8 +26,8 @@ export const Recipt = ({ tokens }) => {
     const sendToServer = async () => {
         setIsLoading(true);
         const user = tg.initDataUnsafe.user;
-        //const userId = user.id;
-        const userId = '299602933';
+        const userId = user.id;
+        //const userId = '299602933';
 
         await axios.post('/users/sendGpt', {
             userId,
