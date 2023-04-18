@@ -3,10 +3,17 @@
     padding: 20px;
 
     .leftBar {
-        list-style: none;
+        display: flex;
+
+        width: 180px;
+        ul {
+            list-style: none;
+            li {
+                margin: 15px 0;
+                cursor: pointer;
+            }
+        }
     }
     .rightBar {
-        .analiticsPage {
-        }
     }
 }

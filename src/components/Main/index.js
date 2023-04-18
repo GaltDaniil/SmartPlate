@@ -27,12 +27,33 @@ export const Main = ({ tokens, diets, userId }) => {
                         <span>{diets}</span>
                     </div>
                 </div>
-                <Link to={'/form'} className={styles.mainButton}>
+                <Link to={'/form'} className={styles.dietRacions}>
+                    <img src="./dietRacions.png" alt="" />
+                    <div>
+                        <h3>Рацион питания для похудения</h3>
+                        <span></span>
+                    </div>
+                </Link>
+                <Link className={styles.massRacions}>
+                    <img src="./massRacions.png" alt="" />
+                    <div>
+                        <h3>Рацион питания для набора массы</h3>
+                        <span></span>
+                    </div>
+                </Link>
+                <Link to={'/recipt'} className={styles.recipt}>
+                    <img src="./recipt.png" alt="" />
+                    <div>
+                        <h3>Генератор рецептов из ваших продуктов</h3>
+                        <span></span>
+                    </div>
+                </Link>
+                {/* <Link to={'/form'} className={styles.mainButton}>
                     Новый рацион
                 </Link>
                 <Link to={'/recipt'} className={styles.mainButton}>
                     Собрать рецепт
-                </Link>
+                </Link> */}
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Link
                         onClick={() => setPayIsOpen((pred) => !pred)}

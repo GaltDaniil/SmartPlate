@@ -1,0 +1,19 @@
+.analiticsPage {
+    width: 100vh;
+    .line {
+        display: flex;
+        justify-content: space-between;
+        background: rgb(250, 250, 250);
+        padding: 10px;
+
+        .card {
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgb(209, 209, 209);
+            h3 {
+                margin: 0;
+                font-size: 16px;
+            }
+        }
+    }
+}
