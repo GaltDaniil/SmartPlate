@@ -5,7 +5,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 
 export const Pay = ({ setPayIsOpen, userId }) => {
-    const [activeItem, setActiveItem] = React.useState({ index: '0', value: 129 });
+    const [value, setValue] = React.useState(10);
+    const [bonus, setBonus] = React.useState(0);
+    const [price, setPrice] = React.useState(99);
+
+    const handleSliderChange = (e) => {
+        const newValue = parseInt(e.target.value, 10); // преобразуем значение в число
+        setValue(newValue); // обновляем значение ползунка
+        if (newValue > 20 && newValue <= 40) {
+            setBonus(2);
+        } else if (newValue > 40 && newValue < 60) {
+            setBonus(4);
+        } else if (newValue >= 60 && newValue < 80) {
+            setBonus(7);
+        } else if (newValue >= 80 && newValue < 100) {
+            setBonus(10);
+        } else if (newValue === 100) {
+            setBonus(15);
+        } else {
+            setBonus(0);
+        }
+        setPrice((pred) => newValue * 10 - 1);
+    };
 
     const pay = function (cost) {
         // eslint-disable-next-line no-undef
@@ -24,7 +45,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                 email: 'user@example.com', //email плательщика (необязательно)
                 skin: 'mini', //дизайн виджета (необязательно)
                 data: {
-                    myProp: 'some text',
+                    myProp: `${value + bonus}`,
                 },
             },
 
@@ -67,42 +88,41 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                     icon={faXmarkCircle}
                     size="lg"
                 />
-                <ul className={styles.tarifs}>
-                    <li
-                        onClick={() => {
-                            setActiveItem((pred) => {
-                                return { index: '0', value: 129 };
-                            });
-                        }}
-                        className={activeItem.index === '0' ? `${styles.checked}` : ''}
-                    >
-                        <h3>10 шт</h3>
-                        <span>129 руб.</span>
-                    </li>
-                    <li
-                        onClick={() => {
-                            setActiveItem((pred) => {
-                                return { index: '1', value: 299 };
-                            });
-                        }}
-                        className={activeItem.index === '1' ? `${styles.checked}` : ''}
-                    >
-                        <h3>30 шт</h3>
-                        <span>299 руб.</span>
-                    </li>
-                    <li
-                        onClick={() => {
-                            setActiveItem((pred) => {
-                                return { index: '2', value: 549 };
-                            });
-                        }}
-                        className={activeItem.index === '2' ? `${styles.checked}` : ''}
-                    >
-                        <h3>60 шт</h3>
-                        <span>549 руб.</span>
-                    </li>
-                </ul>
-                <button onClick={() => pay(activeItem.value)}>Оплатить</button>
+                <div className={styles.content}>
+                    <div className={styles.slider}>
+                        <span>Выберите количество токенов</span>
+                        <input
+                            className={styles.range}
+                            type="range"
+                            min={10}
+                            max={100}
+                            step={10}
+                            value={value}
+                            onChange={handleSliderChange}
+                        />
+                        <ul className={styles.values}>
+                            <li>10</li>
+
+                            <li>100</li>
+                        </ul>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div className={styles.chape}>
+                            <span className={styles.payTitle}>Токены:</span>
+                            <span className={styles.payValue}>{value}</span>
+                        </div>
+                        <div className={styles.chape}>
+                            <span className={styles.payTitle}>Бонус:</span>
+                            <span className={styles.payValue}>{bonus}</span>
+                        </div>
+                        <div className={styles.chape}>
+                            <span className={styles.payTitle}>Сумма:</span>
+                            <span className={styles.payValue}>{price}₽</span>
+                        </div>
+                    </div>
+                </div>
+                <button onClick={() => pay(price)}>Оплатить</button>
             </div>
         </div>
     );

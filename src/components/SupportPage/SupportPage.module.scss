@@ -1,0 +1,61 @@
+.menuBar {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+    background: rgb(156, 221, 125);
+    padding: 20px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    padding: 0 20px;
+    height: 100vh;
+
+    h3 {
+        font-weight: 500;
+        font-size: 16;
+    }
+
+    ul {
+        list-style: none;
+
+        li {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+
+            input {
+                height: 25px;
+                width: 25px;
+            }
+            span {
+                font-size: 14px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .textarea {
+        margin-top: 10px;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 14px;
+    }
+    .sendBtn {
+        margin-top: 10px;
+        width: 150px;
+        height: 40px;
+        border-radius: 6px;
+        background: rgb(98, 182, 65);
+        color: white;
+        border: none;
+        &:disabled {
+            background: rgb(156, 156, 156);
+        }
+    }
+}

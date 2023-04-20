@@ -9,44 +9,43 @@ import { Main } from './components/Main';
 import { Info } from './components/Info';
 import { Recipt } from './components/Recipt';
 import { AnaliticsPage } from './components/AnaliticsPage';
+import { SupportPage } from './components/SupportPage';
 
 function App() {
     const [tg] = useTelegram();
     const user = tg.initDataUnsafe.user;
-    const userId = '299602933';
-    //const userId = user.id;
+    //const userId = '299602933';
+    const userId = user.id;
 
     const [userInfo, setUserInfo] = React.useState({});
-    const [isLoaded, setIsLoaded] = React.useState(false);
+    const [isLoading, setIsloading] = React.useState(false);
 
     React.useEffect(() => {
-        setIsLoaded(false);
         const fn = async () => {
             const { data } = await axios.get(`/users/${userId}`);
             setUserInfo((pred) => data);
+            setIsloading(true);
         };
         fn();
 
         tg.expand();
-        setIsLoaded(true);
     }, []);
 
     return (
         <>
             <Router>
                 <Routes>
-                    {isLoaded ? (
-                        <Route
-                            path="/"
-                            element={
-                                <Main
-                                    userId={userId}
-                                    tokens={userInfo.tokens}
-                                    diets={userInfo.diets}
-                                />
-                            }
-                        />
-                    ) : null}
+                    <Route
+                        path="/"
+                        element={
+                            <Main
+                                isLoading={isLoading}
+                                userId={userId}
+                                tokens={userInfo.tokens}
+                                diets={userInfo.diets}
+                            />
+                        }
+                    />
                     <Route
                         path="/form"
                         element={<Form tokens={userInfo.tokens} diets={userInfo.diets} />}
@@ -54,6 +53,7 @@ function App() {
                     <Route path="/info" element={<Info />} />
                     <Route path="/recipt" element={<Recipt />} />
                     <Route path="/analitics" element={<AnaliticsPage />} />
+                    <Route path="/support" element={<SupportPage userId={userId} />} />
                 </Routes>
             </Router>
         </>

@@ -1,0 +1,43 @@
+.container {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+
+    h3 {
+        font-size: 22px;
+    }
+    span {
+        font-size: 14px;
+        text-align: center;
+
+        margin: 15px 0;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img {
+        width: 200px;
+    }
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        text-decoration: none;
+        color: white;
+        background: rgb(161, 233, 139);
+        width: 100%;
+        height: 45px;
+        border: none;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+}

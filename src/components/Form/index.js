@@ -6,6 +6,7 @@ import axios from '../../axios.js';
 import { Loader } from '../Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
+import { Done } from '../Done';
 
 export const Form = ({ tokens }) => {
     const [tg] = useTelegram();
@@ -39,7 +40,6 @@ export const Form = ({ tokens }) => {
     }, [gender, age, weight, height, activityLevel, mealFrequency]);
 
     const sendToServer = async () => {
-        setIsReady(false);
         setIsLoading(true);
         const user = tg.initDataUnsafe.user;
         const userId = user.id;
@@ -48,7 +48,6 @@ export const Form = ({ tokens }) => {
             requestText,
         });
         tg.close();
-        setIsLoading(false);
     };
 
     const requestText = `Составь рацион питания на день для ${gender}
@@ -81,31 +80,32 @@ export const Form = ({ tokens }) => {
   `;
 
     return (
-        <div>
-            {isLoading ? (
-                <Loader />
-            ) : (
-                <div className={styles.container}>
-                    <div className={styles.menuBar}>
-                        <Link to={'/'}>
-                            <FontAwesomeIcon
-                                color="white"
-                                onClick={() => {}}
-                                icon={faAngleLeft}
-                                size="sm"
-                            />
-                        </Link>
+        <>
+            <div className={styles.menuBar}>
+                <Link to={'/'}>
+                    <FontAwesomeIcon
+                        color="white"
+                        onClick={() => {}}
+                        icon={faAngleLeft}
+                        size="sm"
+                    />
+                </Link>
 
-                        <h2 style={{ color: 'white', fontSize: '20px' }}>Новый рацион</h2>
-                        <FontAwesomeIcon
-                            style={{ opacity: '0' }}
-                            icon={faCircleQuestion}
-                            size="lg"
-                        />
-                    </div>
+                <h2 style={{ color: 'white', fontSize: '20px' }}>Новый рацион</h2>
+                <FontAwesomeIcon style={{ opacity: '0' }} icon={faCircleQuestion} size="lg" />
+            </div>
+
+            <div className={styles.container}>
+                {isLoading ? (
+                    <Done />
+                ) : (
                     <div className={styles.field}>
                         <h3>Базовые параметры</h3>
-
+                        <span>
+                            Рационы питания рассчитываются из ваших индивидуальных характиристик.
+                            Чем более детальную информацию вы предоставите, тем более точным,
+                            вкусным и эффективным будет рацион.
+                        </span>
                         {/* <span>Пол</span> */}
                         <select value={gender} onChange={(e) => setGender(e.target.value)}>
                             <option value="">Выберите пол*</option>
@@ -303,8 +303,8 @@ export const Form = ({ tokens }) => {
                             Составить рацион
                         </button>
                     </div>
-                </div>
-            )}
-        </div>
+                )}{' '}
+            </div>
+        </>
     );
 };

@@ -1,92 +1,98 @@
+.menuBar {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+    background: rgb(156, 221, 125);
+    padding: 20px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: white;
-    .menuBar {
-        display: flex;
-        justify-content: space-between;
-        height: 50px;
-        align-items: center;
-        background: rgb(156, 221, 125);
-        padding: 20px;
-        border-bottom: 1px solid rgb(240, 240, 240);
-    }
+    padding: 20px;
+
     .field {
         display: flex;
         flex-direction: column;
-        padding: 20px;
-    }
 
-    span {
-        opacity: 0.8;
-        margin-bottom: 5px;
-        margin-right: 15px;
-    }
+        span {
+            opacity: 0.8;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
 
-    input {
-        margin-top: 5px;
-        margin-bottom: 15px;
-        font-size: 15px;
-        padding: 5px 10px;
-        height: 45px;
-        border-radius: 10px;
-        background: #ffffff;
-        border: 1px solid rgb(214, 214, 214);
-        //box-shadow: 2px 2px 0px 0px rgba(41, 41, 41, 1);
-    }
+        input {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            padding: 5px 10px;
+            height: 45px;
+            border-radius: 10px;
+            background: #ffffff;
+            border: 1px solid rgb(214, 214, 214);
+            //box-shadow: 2px 2px 0px 0px rgba(41, 41, 41, 1);
+        }
 
-    select {
-        margin-top: 5px;
-        margin-bottom: 15px;
-        font-size: 15px;
-        padding: 5px 10px;
-        color: rgb(114, 114, 114);
-        height: 45px;
-        border-radius: 10px;
-        border: 1px solid rgb(214, 214, 214);
-        background: #ffffff;
-        //box-shadow: 2px 2px 0px 0px rgb(41, 41, 41);
-    }
+        select {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            padding: 5px 10px;
+            color: rgb(114, 114, 114);
+            height: 45px;
+            border-radius: 10px;
+            border: 1px solid rgb(214, 214, 214);
+            background: #ffffff;
+            //box-shadow: 2px 2px 0px 0px rgb(41, 41, 41);
+        }
 
-    .flex {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+        .flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .inputWaH {
-        width: 30%;
-    }
-    h3 {
-        margin-top: 15px;
-    }
+        .inputWaH {
+            width: 30%;
+        }
+        h3 {
+            font-size: 18px;
+            margin-top: 20px;
+        }
 
-    p {
-        font-size: 13px;
-        opacity: 0.7;
-    }
-    .check {
-        width: 25px;
-        margin-right: 10px;
-    }
-    .isCheckedTitle {
-        color: rgb(161, 161, 161);
-    }
-    .isCheckedInput {
-        background: #ebebeb;
-    }
-    button {
-        height: 45px;
-        width: 100%;
-        margin-top: 20px;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 8px;
-        color: white;
-        font-size: 16px;
-        border: 1px solid rgb(216, 216, 216);
-        background: rgb(156, 221, 125);
-    }
-    button:disabled {
-        background-color: rgb(202, 202, 202);
-        color: rgb(39, 39, 39);
+        p {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+        .check {
+            width: 25px;
+            margin-right: 10px;
+        }
+        .isCheckedTitle {
+            color: rgb(161, 161, 161);
+        }
+        .isCheckedInput {
+            background: #ebebeb;
+        }
+
+        button {
+            height: 45px;
+            width: 100%;
+            margin: 30px auto;
+            margin-bottom: 50px;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            border: 1px solid rgb(216, 216, 216);
+            background: rgb(156, 221, 125);
+        }
+        button:disabled {
+            background-color: rgb(202, 202, 202);
+            color: rgb(39, 39, 39);
+        }
     }
 }

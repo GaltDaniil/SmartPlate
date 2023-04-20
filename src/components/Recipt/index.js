@@ -6,6 +6,7 @@ import axios from '../../axios.js';
 import { Loader } from '../Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
+import { Done } from '../Done';
 
 export const Recipt = ({ tokens }) => {
     const [tg] = useTelegram();
@@ -43,7 +44,7 @@ export const Recipt = ({ tokens }) => {
     return (
         <div>
             {isLoading ? (
-                <Loader />
+                <Done />
             ) : (
                 <div className={styles.container}>
                     <div className={styles.menuBar}>
