@@ -3,28 +3,20 @@ import styles from './Loader.module.scss';
 import React from 'react';
 
 export const Loader = () => {
-    const texts = [
-        'Анализируем ваши данные...',
-        'Подбираем продукты...',
-        'Рассчитываем КБЖУ...',
-        'Моем тарелки...',
-        'Подбираем вкусные рецепты...',
-        'Расписываем рационы по дням...',
-    ];
-
-    const [textIndex, setTextIndex] = React.useState(0);
-
-    React.useEffect(() => {
-        const interval = setInterval(() => {
-            setTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-        }, 2000);
-        return () => clearInterval(interval);
-    }, [texts]);
-
     return (
         <div className={styles.container}>
-            <div className={styles.loader}></div>
-            <span>{texts[textIndex]}</span>
+            <div className={styles.preloader}>
+                <div className={styles.ikigai}>
+                    <div className={`${styles.circleLegft} ${styles.circleContainer}`}></div>
+                    <div className={`${styles.circleTop} ${styles.circleContainer}`}></div>
+                    <div className={`${styles.circleRight} ${styles.circleContainer}`}></div>
+                    <div className={`${styles.circleBotomm} ${styles.circleContainer}`}></div>
+                    <div className={styles.logo}>
+                        IKIG.<span>AI</span>
+                    </div>
+                </div>
+            </div>
+            ;
         </div>
     );
 };

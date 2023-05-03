@@ -5,7 +5,7 @@ import { useTelegram } from '../../hooks/useTelegram';
 import styles from './Done.module.scss';
 
 export const Done = (props) => {
-    const tg = useTelegram();
+    const [tg] = useTelegram();
     return (
         <div className={styles.container}>
             <div className={styles.content}>

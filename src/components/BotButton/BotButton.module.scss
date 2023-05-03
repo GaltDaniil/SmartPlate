@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    margin: 5px 0;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 5px 2px rgb(231, 231, 231);
+    width: 100%;
+    height: 100px;
+    border: none;
+    border-radius: 14px;
+    .text {
+        margin: 0;
+        padding-left: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 200px;
+        h3 {
+            margin: 0;
+            margin-bottom: 4px;
+            font-size: 18px;
+        }
+        span {
+            margin: 0;
+            font-size: 13px;
+        }
+    }
+
+    .botAvatar {
+        position: relative;
+        img {
+            margin: 0;
+            height: 90px;
+            width: 90px;
+            border-radius: 14px;
+        }
+        .online {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgb(12, 226, 12);
+            position: absolute;
+            right: 10px;
+            bottom: 4px;
+        }
+    }
+}

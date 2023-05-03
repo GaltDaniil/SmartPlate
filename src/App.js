@@ -10,21 +10,27 @@ import { Info } from './components/Info';
 import { Recipt } from './components/Recipt';
 import { AnaliticsPage } from './components/AnaliticsPage';
 import { SupportPage } from './components/SupportPage';
+import { Loader } from './components/Loader';
+import { BotPage } from './components/BotPage';
 
 function App() {
     const [tg] = useTelegram();
     const user = tg.initDataUnsafe.user;
-    //const userId = '299602933';
-    const userId = user.id;
+
+    const userId = 299602933;
+    //const userId = user.id;
 
     const [userInfo, setUserInfo] = React.useState({});
-    const [isLoading, setIsloading] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         const fn = async () => {
             const { data } = await axios.get(`/users/${userId}`);
             setUserInfo((pred) => data);
-            setIsloading(true);
+
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 2000);
         };
         fn();
 
@@ -33,29 +39,36 @@ function App() {
 
     return (
         <>
-            <Router>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Main
-                                isLoading={isLoading}
-                                userId={userId}
-                                tokens={userInfo.tokens}
-                                diets={userInfo.diets}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/form"
-                        element={<Form tokens={userInfo.tokens} diets={userInfo.diets} />}
-                    />
-                    <Route path="/info" element={<Info />} />
-                    <Route path="/recipt" element={<Recipt />} />
-                    <Route path="/analitics" element={<AnaliticsPage />} />
-                    <Route path="/support" element={<SupportPage userId={userId} />} />
-                </Routes>
-            </Router>
+            {!isLoading ? (
+                <Router>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <Main
+                                    isLoading={isLoading}
+                                    userId={userId}
+                                    tokens={userInfo.tokens}
+                                    diets={userInfo.diets}
+                                    avatar={userInfo.avatar}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/form"
+                            element={<Form tokens={userInfo.tokens} diets={userInfo.diets} />}
+                        />
+                        <Route path="/info" element={<Info />} />
+                        <Route path="/recipt" element={<Recipt />} />
+                        <Route path="/analitics" element={<AnaliticsPage />} />
+                        <Route path="/support" element={<SupportPage userId={userId} />} />
+                        <Route path="/jora" element={<BotPage userId={userId} />} />
+                        <Route path="/loading" element={<Loader userId={userId} />} />
+                    </Routes>
+                </Router>
+            ) : (
+                <Loader />
+            )}
         </>
     );
 }

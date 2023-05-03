@@ -5,27 +5,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 
 export const Pay = ({ setPayIsOpen, userId }) => {
-    const [value, setValue] = React.useState(10);
+    const [value, setValue] = React.useState(100);
     const [bonus, setBonus] = React.useState(0);
-    const [price, setPrice] = React.useState(99);
+    const [price, setPrice] = React.useState(199);
 
     const handleSliderChange = (e) => {
         const newValue = parseInt(e.target.value, 10); // преобразуем значение в число
         setValue(newValue); // обновляем значение ползунка
-        if (newValue > 20 && newValue <= 40) {
-            setBonus(2);
-        } else if (newValue > 40 && newValue < 60) {
-            setBonus(4);
-        } else if (newValue >= 60 && newValue < 80) {
-            setBonus(7);
-        } else if (newValue >= 80 && newValue < 100) {
+        if (newValue > 100 && newValue <= 200) {
             setBonus(10);
-        } else if (newValue === 100) {
-            setBonus(15);
+        } else if (newValue > 200 && newValue < 300) {
+            setBonus(20);
+        } else if (newValue >= 300 && newValue < 400) {
+            setBonus(30);
+        } else if (newValue >= 400 && newValue < 500) {
+            setBonus(50);
+        } else if (newValue === 500) {
+            setBonus(100);
         } else {
             setBonus(0);
         }
-        setPrice((pred) => newValue * 10 - 1);
+        setPrice((pred) => newValue * 2 - 1);
     };
 
     const pay = function (cost) {
@@ -45,7 +45,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                 email: 'user@example.com', //email плательщика (необязательно)
                 skin: 'mini', //дизайн виджета (необязательно)
                 data: {
-                    myProp: `${value + bonus}`,
+                    myProp: `Any props`,
                 },
             },
 
@@ -65,6 +65,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                     if (paymentResult.success) {
                         await axios.post('/users/pay', {
                             amount: cost,
+                            tokens: value + bonus,
                             userId: userId,
                             email: options.email,
                         });
@@ -94,16 +95,16 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                         <input
                             className={styles.range}
                             type="range"
-                            min={10}
-                            max={100}
-                            step={10}
+                            min={100}
+                            max={500}
+                            step={50}
                             value={value}
                             onChange={handleSliderChange}
                         />
                         <ul className={styles.values}>
-                            <li>10</li>
-
                             <li>100</li>
+
+                            <li>500</li>
                         </ul>
                     </div>
 
@@ -114,7 +115,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                         </div>
                         <div className={styles.chape}>
                             <span className={styles.payTitle}>Бонус:</span>
-                            <span className={styles.payValue}>{bonus}</span>
+                            <span className={styles.payValue}>+{bonus}</span>
                         </div>
                         <div className={styles.chape}>
                             <span className={styles.payTitle}>Сумма:</span>
