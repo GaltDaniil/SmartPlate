@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Pay } from '../Pay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import { BotButton } from '../BotButton';
 import { BotPage } from '../BotPage';
 
@@ -98,29 +98,16 @@ export const Main = ({ tokens, diets, userId, avatar }) => {
                 <h2 style={{ color: 'white', fontSize: '20px' }}>IKIG.AI</h2>
             </div>
             <div className={styles.container}>
-                {/* <h2 className={styles.title}>
-                Составь <b>Идеальный</b>
-                <br />
-                <b>Рацион</b> Питания
-            </h2> */}
-
                 <div className={styles.shape}>
-                    {/* <div className={styles.info}>
-                        <div>
-                            <h2>Баланс</h2>
-                            <div style={{ display: 'flex' }}>
-                                <h3>Токены:</h3>
-                                <span>{tokens}</span>
-                            </div>
-                        </div>
-                        <FontAwesomeIcon
-                            onClick={() => setPayIsOpen((pred) => !pred)}
-                            className={styles.button}
-                            icon={faPlus}
-                            size="lg"
-                        />
-                    </div> */}
                     <div>
+                        <h3>Инструкция</h3>
+                        <p>
+                            Обязательно прочтите инструкцию перед использованием ботов. Это позволит
+                            вам составлять идеальные запросы для качественных ответов.
+                        </p>
+                        <Link to={'/info'} className={styles.infoButton}>
+                            Инструкция
+                        </Link>
                         <h3>Боты-эксперты</h3>
                         {botsData.map((el) => {
                             return (
