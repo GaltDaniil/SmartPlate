@@ -25,8 +25,8 @@ export const BotPage = ({ name, img, title, options, userId, setIsBotPageOpen, t
                 <span>{options.specialization}</span>
                 <h4>Возможности:</h4>
                 <span>{options.possibilities}</span>
-                <h4>Советы:</h4>
-                <span>{options.adviсe}</span>
+                {/* <h4>Советы:</h4>
+                <span>{options.adviсe}</span> */}
 
                 <button
                     onClick={() => {
@@ -37,7 +37,7 @@ export const BotPage = ({ name, img, title, options, userId, setIsBotPageOpen, t
                         }, 1000);
                         setIsBotStarting(false);
                     }}
-                    disabled={tokens < 1 || isBotStarting ? true : false}
+                    disabled={isBotStarting ? true : false}
                 >
                     Начать сессию с ботом
                 </button>
