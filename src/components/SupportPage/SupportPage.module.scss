@@ -3,7 +3,9 @@
     justify-content: space-between;
     height: 50px;
     align-items: center;
-    background: rgb(156, 221, 125);
+    background: rgb(62, 79, 107);
+    background: radial-gradient(circle, rgba(62, 79, 107, 1) 29%, rgba(134, 203, 177, 1) 100%);
+
     padding: 20px;
     border-bottom: 1px solid rgb(240, 240, 240);
 }
@@ -17,7 +19,7 @@
     height: 100vh;
 
     h3 {
-        font-weight: 500;
+        font-weight: 700;
         font-size: 16;
     }
 
@@ -34,7 +36,7 @@
                 width: 25px;
             }
             span {
-                font-size: 14px;
+                font-size: 12px;
                 margin-left: 10px;
             }
         }

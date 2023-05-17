@@ -6,9 +6,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import { useTelegram } from '../../hooks/useTelegram';
 
-export const BotPage = ({ name, img, title, options, userId, setIsBotPageOpen, tokens }) => {
+export const BotPage = ({ name, img, title, options, userId, setIsBotPageOpen, subscription }) => {
     const [tg] = useTelegram();
     const [isBotStarting, setIsBotStarting] = React.useState(false);
+
+    console.log(subscription);
+    const checkSub = () => {
+        if (subscription.freePeriod === true) {
+            return true;
+        } else if (subscription.isActive === true) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    const isActiveSub = checkSub();
 
     React.useEffect(() => {}, []);
 
@@ -25,8 +37,6 @@ export const BotPage = ({ name, img, title, options, userId, setIsBotPageOpen, t
                 <span>{options.specialization}</span>
                 <h4>Возможности:</h4>
                 <span>{options.possibilities}</span>
-                {/* <h4>Советы:</h4>
-                <span>{options.adviсe}</span> */}
 
                 <button
                     onClick={() => {
@@ -37,10 +47,11 @@ export const BotPage = ({ name, img, title, options, userId, setIsBotPageOpen, t
                         }, 1000);
                         setIsBotStarting(false);
                     }}
-                    disabled={isBotStarting ? true : false}
+                    disabled={!isActiveSub || isBotStarting ? true : false}
                 >
                     Начать сессию с ботом
                 </button>
+                <p>{!isActiveSub ? '* оформите подписку' : ''}</p>
                 <FontAwesomeIcon
                     onClick={() => setIsBotPageOpen((pred) => !pred)}
                     className={styles.xmark}

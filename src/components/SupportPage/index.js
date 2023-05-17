@@ -34,7 +34,12 @@ export const SupportPage = ({ userId }) => {
         <>
             <div className={styles.menuBar}>
                 <Link to={'/'}>
-                    <FontAwesomeIcon color="white" icon={faAngleLeft} size="sm" />
+                    <FontAwesomeIcon
+                        color="white"
+                        onClick={() => {}}
+                        icon={faAngleLeft}
+                        size="sm"
+                    />
                 </Link>
 
                 <h2 style={{ color: 'white', fontSize: '20px' }}>Обратная связь</h2>

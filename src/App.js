@@ -44,15 +44,7 @@ function App() {
                     <Routes>
                         <Route
                             path="/"
-                            element={
-                                <Main
-                                    isLoading={isLoading}
-                                    userId={userId}
-                                    tokens={userInfo.tokens}
-                                    diets={userInfo.diets}
-                                    avatar={userInfo.avatar}
-                                />
-                            }
+                            element={<Main isLoading={isLoading} userId={userId} {...userInfo} />}
                         />
                         <Route
                             path="/form"

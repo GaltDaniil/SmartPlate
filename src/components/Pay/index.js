@@ -2,31 +2,11 @@ import React from 'react';
 import styles from './Pay.module.scss';
 import axios from '../../axios.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
+import { faXmarkCircle, faRuble } from '@fortawesome/free-regular-svg-icons';
+import { faRubleSign } from '@fortawesome/free-solid-svg-icons';
 
 export const Pay = ({ setPayIsOpen, userId }) => {
-    const [value, setValue] = React.useState(100);
-    const [bonus, setBonus] = React.useState(0);
-    const [price, setPrice] = React.useState(199);
-
-    const handleSliderChange = (e) => {
-        const newValue = parseInt(e.target.value, 10); // преобразуем значение в число
-        setValue(newValue); // обновляем значение ползунка
-        if (newValue > 100 && newValue <= 200) {
-            setBonus(10);
-        } else if (newValue > 200 && newValue < 300) {
-            setBonus(20);
-        } else if (newValue >= 300 && newValue < 400) {
-            setBonus(30);
-        } else if (newValue >= 400 && newValue < 500) {
-            setBonus(50);
-        } else if (newValue === 500) {
-            setBonus(100);
-        } else {
-            setBonus(0);
-        }
-        setPrice((pred) => newValue * 2 - 1);
-    };
+    const [tarif, setTarif] = React.useState(299);
 
     const pay = function (cost) {
         // eslint-disable-next-line no-undef
@@ -65,7 +45,6 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                     if (paymentResult.success) {
                         await axios.post('/users/pay', {
                             amount: cost,
-                            tokens: value + bonus,
                             userId: userId,
                             email: options.email,
                         });
@@ -82,7 +61,8 @@ export const Pay = ({ setPayIsOpen, userId }) => {
     return (
         <div className={styles.overlay}>
             <div className={styles.payContainer}>
-                <h2>Добавить токенов</h2>
+                <h2>Подписка на IKIG.AI</h2>
+                <p>Пользуйся ботами без ограничений и развивайся в свой сфере еще быстрей.</p>
                 <FontAwesomeIcon
                     onClick={() => setPayIsOpen((pred) => !pred)}
                     className={styles.xmark}
@@ -90,7 +70,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                     size="lg"
                 />
                 <div className={styles.content}>
-                    <div className={styles.slider}>
+                    {/* <div className={styles.slider}>
                         <span>Выберите количество токенов</span>
                         <input
                             className={styles.range}
@@ -106,24 +86,60 @@ export const Pay = ({ setPayIsOpen, userId }) => {
 
                             <li>500</li>
                         </ul>
-                    </div>
+                    </div> */}
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <div className={styles.chape}>
-                            <span className={styles.payTitle}>Токены:</span>
-                            <span className={styles.payValue}>{value}</span>
-                        </div>
-                        <div className={styles.chape}>
-                            <span className={styles.payTitle}>Бонус:</span>
-                            <span className={styles.payValue}>+{bonus}</span>
-                        </div>
-                        <div className={styles.chape}>
-                            <span className={styles.payTitle}>Сумма:</span>
-                            <span className={styles.payValue}>{price}₽</span>
-                        </div>
-                    </div>
+                    <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <li
+                            onClick={() => {
+                                setTarif(299);
+                            }}
+                            className={tarif === 299 ? styles[('shape', 'checked')] : styles.shape}
+                        >
+                            <span className={styles.payTitle}>1 месяц:</span>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <span className={styles.payValue}>299</span>
+                                <FontAwesomeIcon
+                                    style={{ marginLeft: '3px', color: '#65a38b' }}
+                                    icon={faRubleSign}
+                                    size="sm"
+                                />
+                            </div>
+                        </li>
+                        <li
+                            onClick={(e) => {
+                                setTarif(799);
+                            }}
+                            className={tarif === 799 ? styles[('shape', 'checked')] : styles.shape}
+                        >
+                            <span className={styles.payTitle}>3 месяца:</span>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <span className={styles.payValue}>799</span>
+                                <FontAwesomeIcon
+                                    style={{ marginLeft: '3px', color: '#65a38b' }}
+                                    icon={faRubleSign}
+                                    size="sm"
+                                />
+                            </div>
+                        </li>
+                        <li
+                            onClick={(e) => {
+                                setTarif(1499);
+                            }}
+                            className={tarif === 1499 ? styles[('shape', 'checked')] : styles.shape}
+                        >
+                            <span className={styles.payTitle}>6 месяцев:</span>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <span className={styles.payValue}>1499</span>
+                                <FontAwesomeIcon
+                                    style={{ marginLeft: '3px', color: '#65a38b' }}
+                                    icon={faRubleSign}
+                                    size="sm"
+                                />
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <button onClick={() => pay(price)}>Оплатить</button>
+                <button onClick={() => pay(tarif)}>Оплатить</button>
             </div>
         </div>
     );

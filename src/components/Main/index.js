@@ -86,11 +86,25 @@ const botsData = [
     }, */
 ];
 
-export const Main = ({ tokens, diets, userId, avatar }) => {
+export const Main = ({ tokens, userId, subscription, createdAt }) => {
     const [payIsOpen, setPayIsOpen] = React.useState(false);
     const [isBotPageOpen, setIsBotPageOpen] = React.useState(false);
     const [props, setProps] = React.useState(null);
-    console.log(props);
+
+    const createDate = new Date(createdAt);
+
+    const days = () => {
+        if (subscription.freePeriod) {
+            const today = new Date();
+            const endTime = createDate.getTime() + 259200000;
+            const leftTime = endTime - today.getTime();
+            const leftDays = Math.round(leftTime / (1000 * 60 * 60 * 24));
+            if (leftDays < 0) {
+                return 0;
+            }
+            return leftDays;
+        }
+    };
 
     return (
         <>
@@ -100,14 +114,34 @@ export const Main = ({ tokens, diets, userId, avatar }) => {
             <div className={styles.container}>
                 <div className={styles.shape}>
                     <div>
-                        <h3>Инструкция</h3>
-                        <p>
-                            Обязательно прочтите инструкцию перед использованием ботов. Это позволит
-                            вам составлять идеальные запросы для качественных ответов.
-                        </p>
-                        <Link to={'/info'} className={styles.infoButton}>
-                            Инструкция
-                        </Link>
+                        <div className={styles.info}>
+                            <div className={styles.shapes}>
+                                <p>Тарифный план</p>
+                                <h3>{subscription.isActive ? 'Pro' : 'Стартовый'}</h3>
+                            </div>
+                            <div className={styles.shapes}>
+                                <p>Осталось дней</p>
+                                <h3>{days()}</h3>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    setPayIsOpen((pred) => !pred);
+                                }}
+                            >
+                                +
+                            </button>
+                        </div>
+                        <div className={styles.instruction}>
+                            <h3>Инструкция</h3>
+                            <p>
+                                Обязательно прочтите инструкцию перед использованием ботов. Это
+                                позволит вам составлять идеальные запросы для качественных ответов.
+                            </p>
+                            <Link to={'/info'} className={styles.infoButton}>
+                                Читать
+                            </Link>
+                        </div>
+
                         <h3>Боты-эксперты</h3>
                         {botsData.map((el) => {
                             return (
@@ -124,13 +158,14 @@ export const Main = ({ tokens, diets, userId, avatar }) => {
                             <FontAwesomeIcon icon={faMessage} size="lg" />
                             <span> Обратная связь</span>
                         </Link>
-                        <span className={styles.version}>Версия 1.0.2</span>
+                        <span className={styles.version}>Версия 1.1.0</span>
                     </div>
 
                     {payIsOpen ? <Pay userId={userId} setPayIsOpen={setPayIsOpen} /> : null}
                     {isBotPageOpen ? (
                         <BotPage
                             {...props}
+                            subscription={subscription}
                             tokens={tokens}
                             userId={userId}
                             setIsBotPageOpen={setIsBotPageOpen}
