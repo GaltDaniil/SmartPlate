@@ -107,9 +107,9 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                         </li>
                         <li
                             onClick={(e) => {
-                                setTarif(799);
+                                setTarif(699);
                             }}
-                            className={tarif === 799 ? styles[('shape', 'checked')] : styles.shape}
+                            className={tarif === 699 ? styles[('shape', 'checked')] : styles.shape}
                         >
                             <span className={styles.payTitle}>3 месяца:</span>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -123,9 +123,9 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                         </li>
                         <li
                             onClick={(e) => {
-                                setTarif(1499);
+                                setTarif(1399);
                             }}
-                            className={tarif === 1499 ? styles[('shape', 'checked')] : styles.shape}
+                            className={tarif === 1399 ? styles[('shape', 'checked')] : styles.shape}
                         >
                             <span className={styles.payTitle}>6 месяцев:</span>
                             <div style={{ display: 'flex', alignItems: 'center' }}>

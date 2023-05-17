@@ -91,11 +91,20 @@ export const Main = ({ tokens, userId, subscription, createdAt }) => {
     const [isBotPageOpen, setIsBotPageOpen] = React.useState(false);
     const [props, setProps] = React.useState(null);
 
-    const createDate = new Date(createdAt);
+    const tarif = () => {
+        if (!subscription.freePeriod && !subscription.isActive) {
+            return 'Истек';
+        } else if (subscription.freePeriod && !subscription.isActive) {
+            return 'Стартовый';
+        } else {
+            return 'Pro';
+        }
+    };
 
     const days = () => {
-        if (subscription.freePeriod) {
-            const today = new Date();
+        const today = new Date();
+        if (subscription.freePeriod && !subscription.isActive) {
+            const createDate = new Date(createdAt);
             const endTime = createDate.getTime() + 259200000;
             const leftTime = endTime - today.getTime();
             const leftDays = Math.round(leftTime / (1000 * 60 * 60 * 24));
@@ -103,6 +112,24 @@ export const Main = ({ tokens, userId, subscription, createdAt }) => {
                 return 0;
             }
             return leftDays;
+        } else if (subscription.freePeriod && subscription.isActive) {
+            const endTime = new Date(subscription.dateEnd);
+            const leftTime = endTime.getTime() - today.getTime();
+            const leftDays = Math.round(leftTime / (1000 * 60 * 60 * 24));
+            if (leftDays < 0) {
+                return 0;
+            }
+            return leftDays;
+        } else if (!subscription.freePeriod && subscription.isActive) {
+            const endTime = new Date(subscription.dateEnd);
+            const leftTime = endTime.getTime() - today.getTime();
+            const leftDays = Math.round(leftTime / (1000 * 60 * 60 * 24));
+            if (leftDays < 0) {
+                return 0;
+            }
+            return leftDays;
+        } else {
+            return 0;
         }
     };
 
@@ -117,7 +144,7 @@ export const Main = ({ tokens, userId, subscription, createdAt }) => {
                         <div className={styles.info}>
                             <div className={styles.shapes}>
                                 <p>Тарифный план</p>
-                                <h3>{subscription.isActive ? 'Pro' : 'Стартовый'}</h3>
+                                <h3>{tarif()}</h3>
                             </div>
                             <div className={styles.shapes}>
                                 <p>Осталось дней</p>
