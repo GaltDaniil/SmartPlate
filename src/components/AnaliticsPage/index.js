@@ -1,7 +1,6 @@
 import styles from './AnaliticsPage.module.scss';
 
 import React from 'react';
-import { faN } from '@fortawesome/free-solid-svg-icons';
 import { Accounts } from './Accounts';
 import { Support } from './Support';
 

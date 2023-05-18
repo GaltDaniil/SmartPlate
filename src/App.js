@@ -17,8 +17,8 @@ function App() {
     const [tg] = useTelegram();
     const user = tg.initDataUnsafe.user;
 
-    //const userId = 299602933;
-    const userId = user.id;
+    const userId = 299602933;
+    //const userId = user.id;
 
     const [userInfo, setUserInfo] = React.useState({});
     const [isLoading, setIsLoading] = React.useState(true);
