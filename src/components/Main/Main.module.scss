@@ -37,12 +37,14 @@
 
             .shapes {
                 display: flex;
+                padding: 0 15px;
+                margin-left: 10px;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 background-color: #f5f5f5;
-                margin: 5px;
-                width: 38%;
+
+                //width: 38%;
                 height: 60px;
                 border-radius: 14px;
 
@@ -57,12 +59,12 @@
             }
             button {
                 margin: 0 10px 0 0;
-                width: 40px;
-                height: 40px;
+                width: 100px;
+                padding: 10px 10px;
                 border: none;
                 background-color: #86cbb1;
                 border-radius: 14px;
-                font-size: 30px;
+                font-size: 12px;
                 color: white;
             }
         }

@@ -16,9 +16,11 @@ export const Accounts = () => {
             const createdAt = new Date(el.createdAt);
             return createdAt.toDateString() === today.toDateString();
         });
-        const payment = users.reduce((acc, el) => acc + el.paymentInfo.amout, 0);
-        const requests = users.reduce((acc, el) => acc + el.requests, 0);
-        return [users.length, payment, requests];
+        const payment = users.reduce((acc, el) => {
+            return acc + el.paymentInfo.reduce((acc, el) => acc + el.amount, 0);
+        }, 0);
+
+        return [users.length, payment];
     };
 
     const monthUsers = () => {
@@ -34,16 +36,15 @@ export const Accounts = () => {
         const payment = users.reduce((acc, el) => {
             return acc + el.paymentInfo.reduce((acc, el) => acc + el.amount, 0);
         }, 0);
-        const requests = users.reduce((acc, el) => acc + el.requests, 0);
-        return [users.length, payment, requests];
+
+        return [users.length, payment];
     };
 
     const allTime = () => {
         const payment = accounts.reduce((acc, el) => {
             return acc + el.paymentInfo.reduce((acc, el) => acc + el.amount, 0);
         }, 0);
-        const requests = accounts.reduce((acc, el) => acc + el.requests, 0);
-        return [accounts.length, payment, requests];
+        return [accounts.length, payment];
     };
 
     React.useEffect(() => {
@@ -78,10 +79,6 @@ export const Accounts = () => {
                         <h3>Оплаты</h3>
                         <span>{isLoaded ? todayUsers()[1] : '-'}</span>
                     </div>
-                    <div className={styles.card}>
-                        <h3>Запросы</h3>
-                        <span>{isLoaded ? todayUsers()[2] : '-'}</span>
-                    </div>
                 </div>
             </div>
             <div>
@@ -95,10 +92,6 @@ export const Accounts = () => {
                         <h3>Оплаты</h3>
                         <span>{isLoaded ? monthUsers()[1] : '-'}</span>
                     </div>
-                    <div className={styles.card}>
-                        <h3>Запросы</h3>
-                        <span>{isLoaded ? monthUsers()[2] : '-'}</span>
-                    </div>
                 </div>
             </div>
             <div>
@@ -111,10 +104,6 @@ export const Accounts = () => {
                     <div className={styles.card}>
                         <h3>Оплаты</h3>
                         <span>{isLoaded ? allTime()[1] : '-'}</span>
-                    </div>
-                    <div className={styles.card}>
-                        <h3>Запросы</h3>
-                        <span>{isLoaded ? allTime()[2] : '-'}</span>
                     </div>
                 </div>
             </div>

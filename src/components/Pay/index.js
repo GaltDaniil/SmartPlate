@@ -113,7 +113,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                         >
                             <span className={styles.payTitle}>3 месяца:</span>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <span className={styles.payValue}>799</span>
+                                <span className={styles.payValue}>699</span>
                                 <FontAwesomeIcon
                                     style={{ marginLeft: '3px', color: '#65a38b' }}
                                     icon={faRubleSign}
@@ -129,7 +129,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                         >
                             <span className={styles.payTitle}>6 месяцев:</span>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <span className={styles.payValue}>1499</span>
+                                <span className={styles.payValue}>1399</span>
                                 <FontAwesomeIcon
                                     style={{ marginLeft: '3px', color: '#65a38b' }}
                                     icon={faRubleSign}
