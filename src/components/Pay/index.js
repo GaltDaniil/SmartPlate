@@ -62,7 +62,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
         <div className={styles.overlay}>
             <div className={styles.payContainer}>
                 <h2>Подписка на IKIG.AI</h2>
-                <p>Пользуйся ботами без ограничений и развивайся в свой сфере еще быстрей.</p>
+                <p>Пользуйся ботами без ограничений и развивайся в своей сфере еще быстрей.</p>
                 <FontAwesomeIcon
                     onClick={() => setPayIsOpen((pred) => !pred)}
                     className={styles.xmark}
