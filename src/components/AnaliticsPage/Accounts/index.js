@@ -1,14 +1,8 @@
 import React from 'react';
-import axios from '../../../axios';
 
 import styles from './Accounts.module.scss';
 
-export const Accounts = () => {
-    const [isLoaded, setIsLoaded] = React.useState(false);
-
-    const [accounts, setAccounts] = React.useState({});
-    console.log(accounts);
-
+export const Accounts = ({ accounts, isLoaded }) => {
     const todayUsers = () => {
         const today = new Date();
 
@@ -46,17 +40,6 @@ export const Accounts = () => {
         }, 0);
         return [accounts.length, payment];
     };
-
-    React.useEffect(() => {
-        const fn = async () => {
-            const { data } = await axios.get('/users/');
-
-            setAccounts(data);
-            console.log(data);
-            setIsLoaded(true);
-        };
-        fn();
-    }, []);
 
     /* React.useEffect(() => {
         if (accounts) {

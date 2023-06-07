@@ -1,4 +1,5 @@
 import styles from './AnaliticsPage.module.scss';
+import axios from '../../axios';
 
 import React from 'react';
 import { Accounts } from './Accounts';
@@ -9,6 +10,20 @@ export const AnaliticsPage = () => {
         accounts: true,
         support: false,
     });
+
+    const [isLoaded, setIsLoaded] = React.useState(false);
+    const [accounts, setAccounts] = React.useState({});
+
+    React.useEffect(() => {
+        const fn = async () => {
+            const { data } = await axios.get('/users/');
+
+            setAccounts(data);
+            console.log(data);
+            setIsLoaded(true);
+        };
+        fn();
+    }, []);
 
     return (
         <div className={styles.container}>
@@ -38,8 +53,8 @@ export const AnaliticsPage = () => {
                 </ul>
             </div>
             <div className={styles.rightBar}>
-                {isOpen.accounts ? <Accounts /> : null}
-                {isOpen.support ? <Support /> : null}
+                {isOpen.accounts ? <Accounts accounts={accounts} isLoaded={isLoaded} /> : null}
+                {isOpen.support ? <Support accounts={accounts} /> : null}
             </div>
         </div>
     );
