@@ -4,9 +4,12 @@ import axios from '../../axios.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle, faRuble } from '@fortawesome/free-regular-svg-icons';
 import { faRubleSign } from '@fortawesome/free-solid-svg-icons';
+import { useTelegram } from '../../hooks/useTelegram';
 
 export const Pay = ({ setPayIsOpen, userId }) => {
+    const [tg] = useTelegram();
     const [tarif, setTarif] = React.useState(299);
+    const [isDisabled, setIsDisabled] = React.useState(false);
 
     const pay = function (cost) {
         // eslint-disable-next-line no-undef
@@ -56,6 +59,17 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                 },
             },
         );
+    };
+    const payForPayPal = async (cost) => {
+        setIsDisabled(true);
+        setTimeout(() => {
+            tg.close();
+        }, 1000);
+        await axios.post('/pay/create-payment', {
+            amount: cost,
+            userId: userId,
+        });
+        setIsDisabled(false);
     };
 
     return (
@@ -140,6 +154,13 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                     </ul>
                 </div>
                 <button onClick={() => pay(tarif)}>Оплатить</button>
+                <button disabled={isDisabled ? true : false} onClick={() => payForPayPal(tarif)}>
+                    Оплатить PayPal
+                </button>
+                {/* {isLoadingPayPal?<div className={styles.paypalShape}>
+                    <h2>Подготавливается</h2>
+                    <h2>Ссылка на оплату</h2>
+                </div>:null} */}
             </div>
         </div>
     );
