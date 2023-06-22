@@ -46,7 +46,7 @@ export const Pay = ({ setPayIsOpen, userId }) => {
                 },
                 onComplete: async function (paymentResult, options) {
                     if (paymentResult.success) {
-                        await axios.post('/users/pay', {
+                        await axios.post('/pay/cloudPayments', {
                             amount: cost,
                             userId: userId,
                             email: options.email,

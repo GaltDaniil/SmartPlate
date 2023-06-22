@@ -36,7 +36,7 @@ export const Accounts = ({ accounts, isLoaded }) => {
 
     const allTime = () => {
         const payment = accounts.reduce((acc, el) => {
-            return acc + el.paymentInfo.reduce((acc, el) => acc + el.amount, 0);
+            return acc + el.paymentInfo.reduce((acc, el) => acc + Number(el.amount), 0);
         }, 0);
         return [accounts.length, payment];
     };
