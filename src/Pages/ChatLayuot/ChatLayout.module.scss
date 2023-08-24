@@ -1,0 +1,23 @@
+.content {
+    .chatSpace {
+        padding: 15px;
+        display: flex;
+        flex-direction: column-reverse;
+        background-color: #fff;
+        height: 700px;
+    }
+    .inputHolder {
+        background-color: #fff;
+        width: 100%;
+
+        input {
+            height: 70px;
+            margin: 20px 20px;
+            padding: 10px 10px;
+        }
+        button {
+            height: 50px;
+            width: 50px;
+        }
+    }
+}

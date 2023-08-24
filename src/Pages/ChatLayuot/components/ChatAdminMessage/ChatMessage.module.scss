@@ -1,0 +1,30 @@
+.client {
+    background: rgba(232, 248, 210, 0.911);
+    margin-right: auto;
+}
+.manager {
+    background: rgba(240, 240, 240, 0.911);
+    margin-left: auto;
+}
+.messageShape {
+    display: flex;
+    padding: 20px 20px;
+    margin-top: 15px;
+    border-radius: 20px;
+
+    .message {
+        .name {
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+        .text {
+            margin-right: 10px;
+        }
+    }
+    .time {
+        display: flex;
+        align-self: flex-end;
+        font-size: 12px;
+    }
+}
